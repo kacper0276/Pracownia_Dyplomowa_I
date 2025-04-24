@@ -32,6 +32,10 @@ export class AuthService {
     return JSON.parse(localStorage.getItem(this.USER) || '{}');
   }
 
+  public isLoggedIn(): boolean {
+    return Boolean(localStorage.getItem(this.USER));
+  }
+
   public clearStorage(): void {
     localStorage.clear();
   }
