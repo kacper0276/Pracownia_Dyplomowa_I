@@ -8,14 +8,14 @@ export class CreateTestingUser1745475429275 implements MigrationInterface {
     const password = await bcrypt.hash('test', 10);
 
     await queryRunner.query(
-      `INSERT INTO user (email, login, password, isActive, isOnline)
+      `INSERT INTO users (email, login, password, isActive, isOnline)
        VALUES ('${email}', '${login}', '${password}', true, false)`,
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `DELETE FROM user WHERE email = 'test@example.com'`,
+      `DELETE FROM users WHERE email = 'test@example.com'`,
     );
   }
 }
