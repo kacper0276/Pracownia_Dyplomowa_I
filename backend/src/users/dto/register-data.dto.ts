@@ -1,11 +1,4 @@
-import {
-  IsEmail,
-  IsString,
-  MinLength,
-  IsOptional,
-  IsEnum,
-} from 'class-validator';
-import { Role } from '../../enums/role.enum';
+import { IsEmail, IsString, MinLength, IsOptional } from 'class-validator';
 
 export class RegisterData {
   @IsEmail()
@@ -29,7 +22,4 @@ export class RegisterData {
   @IsOptional()
   @IsString()
   lastName?: string;
-
-  @IsEnum(Role)
-  role: Role;
 }
