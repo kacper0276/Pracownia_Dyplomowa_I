@@ -3,16 +3,16 @@
     <h2>Logowanie</h2>
     <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
       <div class="form-group">
-        <label for="username">Nazwa użytkownika</label>
+        <label for="email">Email</label>
         <input
-          id="username"
-          type="text"
-          formControlName="username"
-          placeholder="Wprowadź nazwę użytkownika"
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Wprowadź email użytkownika"
         />
-        @if (loginForm.get('username')?.invalid &&
-        loginForm.get('username')?.touched) {
-        <div class="error">Nazwa użytkownika jest wymagana.</div>
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched)
+        {
+        <div class="error">Email użytkownika jest wymagany.</div>
         }
       </div>
 
