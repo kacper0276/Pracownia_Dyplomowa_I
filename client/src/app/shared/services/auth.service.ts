@@ -32,6 +32,12 @@ export class AuthService {
     return JSON.parse(localStorage.getItem(this.USER) || '{}');
   }
 
+  public setLoginData(token: string, refreshToken: string, user: any): void {
+    localStorage.setItem(this.JWT_TOKEN, token);
+    localStorage.setItem(this.REFRESH_TOKEN, refreshToken);
+    localStorage.setItem(this.USER, JSON.stringify(user));
+  }
+
   public isLoggedIn(): boolean {
     return Boolean(localStorage.getItem(this.USER));
   }

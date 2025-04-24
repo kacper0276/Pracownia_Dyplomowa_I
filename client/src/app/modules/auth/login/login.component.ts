@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../shared/services/auth.service';
 import { HttpService } from '../../../shared/services/http.service';
+import { ApiResponse, LoginResponseData } from '../../../shared/models';
 
 @Component({
   selector: 'app-login',
@@ -33,16 +34,24 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const loginData = this.loginForm.value;
 
-      this.httpService.post('auth/login', loginData).subscribe({
-        next: (response: any) => {
-          console.log('Zalogowano pomyślnie:', response);
-          this.router.navigate(['/dashboard']);
-        },
-        error: (error) => {
-          console.error('Błąd logowania:', error);
-          alert('Nieprawidłowe dane logowania.');
-        },
-      });
+      this.httpService
+        .post<ApiResponse<LoginResponseData>>('auth/login', loginData)
+        .subscribe({
+          next: (response) => {
+            console.log('Zalogowano pomyślnie:', response.message);
+
+            if (response.data) {
+              const { accessToken, refreshToken, user } = response.data;
+              this.authService.setLoginData(accessToken, refreshToken, user);
+            }
+
+            this.router.navigate(['/dashboard']);
+          },
+          error: (error) => {
+            console.error('Błąd logowania:', error);
+            alert('Nieprawidłowe dane logowania.');
+          },
+        });
     }
   }
 }
