@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })
-export class LayoutComponent implements OnInit {
-  constructor(private toastr: ToastrService) {}
-  ngOnInit(): void {
-    this.toastr.success('Hello world!', 'Toastr fun!');
+export class LayoutComponent {
+  isNavCollapsed = false;
+
+  toggleNav(collapsed: boolean): void {
+    this.isNavCollapsed = collapsed;
   }
 }

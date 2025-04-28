@@ -1,1 +1,12 @@
-<p>layout works!</p>
+<div class="layout">
+  <side-nav
+    [isCollapsed]="isNavCollapsed"
+    (toggleNav)="toggleNav($event)"
+  ></side-nav>
+  <div class="content" [class.full-width]="isNavCollapsed">
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</div>

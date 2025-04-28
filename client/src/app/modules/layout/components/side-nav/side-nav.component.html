@@ -1,0 +1,26 @@
+<div class="side-nav" [class.collapsed]="isCollapsed">
+  <button class="toggle-button" (click)="toggleNavFunc()">
+    <mat-icon>{{ isCollapsed ? "chevron_right" : "chevron_left" }}</mat-icon>
+  </button>
+
+  <ul>
+    <li>
+      <a routerLink="/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/settings">
+        <mat-icon>settings</mat-icon>
+        <span>Ustawienia</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        <span>Profil</span>
+      </a>
+    </li>
+  </ul>
+</div>

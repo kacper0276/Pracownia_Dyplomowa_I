@@ -1,0 +1,68 @@
+.side-nav {
+  width: 250px;
+  background-color: #333;
+  color: white;
+  height: 100%;
+  padding: 20px;
+  transition: width 0.3s ease;
+  overflow: hidden;
+
+  &.collapsed {
+    width: 80px;
+  }
+
+  .toggle-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 24px;
+
+    mat-icon {
+      font-size: 32px;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin: 10px 0;
+
+      a {
+        display: flex;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        overflow: hidden;
+        white-space: nowrap;
+
+        &:hover {
+          background-color: #444;
+        }
+
+        mat-icon {
+          margin-right: 10px;
+          font-size: 24px;
+          flex-shrink: 0;
+        }
+
+        span {
+          flex: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
