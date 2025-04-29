@@ -24,15 +24,15 @@ export class User extends BaseEntity {
   @Column({ default: false })
   isOnline: boolean;
 
-  @Column({ type: 'simple-array', default: '' })
+  @Column({ type: 'simple-array' })
   likedPost: string[];
 
-  @Column({ type: 'simple-array', default: '' })
+  @Column({ type: 'simple-array' })
   friendsId: string[];
 
-  @Column({ type: 'simple-array', default: '' })
+  @Column({ type: 'simple-array' })
   invitedFriends: string[];
 
-  @Column({ type: 'simple-array', default: '' })
+  @Column({ type: 'simple-array' })
   invitedSended: string[];
 }
