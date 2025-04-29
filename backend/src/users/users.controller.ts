@@ -5,6 +5,8 @@ import {
   Get,
   HttpStatus,
   NotFoundException,
+  Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -111,6 +113,65 @@ export class UsersController {
       });
     } catch (error) {
       if (error instanceof NotFoundException) {
+        response.status(HttpStatus.NOT_FOUND).send({
+          message: error.message,
+        });
+      } else {
+        response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+          message: 'a-server-error-occurred',
+        });
+      }
+    }
+  }
+
+  @Post(':id/send-friend-request/:receiverId')
+  async sendFriendRequest(
+    @Param('id', ParseIntPipe) senderId: number,
+    @Param('receiverId', ParseIntPipe) receiverId: number,
+    @Res() response: Response,
+  ) {
+    try {
+      await this.usersService.sendFriendRequest(senderId, receiverId);
+
+      response.status(HttpStatus.OK).send({
+        message: 'friend-request-sent',
+      });
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        response.status(HttpStatus.BAD_REQUEST).send({
+          message: error.message,
+        });
+      } else if (error instanceof NotFoundException) {
+        response.status(HttpStatus.NOT_FOUND).send({
+          message: error.message,
+        });
+      } else {
+        response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+          message: 'a-server-error-occurred',
+        });
+      }
+    }
+  }
+
+  @Post(':id/accept-friend-request/:senderId')
+  async acceptFriendRequest(
+    @Param('id', ParseIntPipe) userId: number,
+    @Param('senderId', ParseIntPipe) senderId: number,
+    @Body('accept') accept: boolean,
+    @Res() response: Response,
+  ): Promise<void> {
+    try {
+      await this.usersService.acceptFriendRequest(userId, senderId, accept);
+
+      response.status(HttpStatus.OK).send({
+        message: accept ? 'friend-request-accepted' : 'friend-request-declined',
+      });
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        response.status(HttpStatus.BAD_REQUEST).send({
+          message: error.message,
+        });
+      } else if (error instanceof NotFoundException) {
         response.status(HttpStatus.NOT_FOUND).send({
           message: error.message,
         });

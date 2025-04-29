@@ -13,6 +13,9 @@ export class User extends BaseEntity {
   password: string;
 
   @Column({ type: 'longtext' })
+  profileImage: string;
+
+  @Column({ type: 'longtext' })
   backgroundImage: string;
 
   @Column({ default: false })
@@ -20,4 +23,16 @@ export class User extends BaseEntity {
 
   @Column({ default: false })
   isOnline: boolean;
+
+  @Column({ type: 'simple-array', default: '' })
+  likedPost: string[];
+
+  @Column({ type: 'simple-array', default: '' })
+  friendsId: string[];
+
+  @Column({ type: 'simple-array', default: '' })
+  invitedFriends: string[];
+
+  @Column({ type: 'simple-array', default: '' })
+  invitedSended: string[];
 }
