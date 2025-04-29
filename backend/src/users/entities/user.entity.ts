@@ -12,6 +12,9 @@ export class User extends BaseEntity {
   @Column({ nullable: false })
   password: string;
 
+  @Column({ type: 'longtext' })
+  backgroundImage: string;
+
   @Column({ default: false })
   isActive: boolean;
 
