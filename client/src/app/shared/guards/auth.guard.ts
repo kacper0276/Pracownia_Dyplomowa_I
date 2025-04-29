@@ -1,15 +1,39 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
+  const http = inject(HttpClient);
 
   if (authService.isLoggedIn()) {
     return true;
   } else {
-    router.navigate(['/auth/login'], { queryParams: { returnUrl: state.url } });
-    return false;
+    try {
+      const refreshToken = authService.getRefreshToken();
+      if (!refreshToken) {
+        throw new Error('Brak refresh tokena');
+      }
+
+      const response: any = await http
+        .post(`${environment.apiUrl}auth/refresh`, { refreshToken })
+        .toPromise();
+
+      authService.setLoginData(
+        response.token,
+        response.refreshToken,
+        response.user
+      );
+
+      return true;
+    } catch (error) {
+      router.navigate(['/auth/login'], {
+        queryParams: { returnUrl: state.url },
+      });
+      return false;
+    }
   }
 };

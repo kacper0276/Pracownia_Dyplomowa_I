@@ -2,17 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../models';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-  private readonly baseUrl = 'http://localhost:3000/api/';
-
   constructor(private readonly http: HttpClient) {}
 
   get<T>(url: string, options?: any): Observable<ApiResponse<T>> {
-    return this.http.get<ApiResponse<T>>(`${this.baseUrl}${url}`, {
+    return this.http.get<ApiResponse<T>>(`${environment.apiUrl}${url}`, {
       observe: 'body',
       responseType: 'json',
       ...options,
@@ -23,7 +22,7 @@ export class HttpService {
   }
 
   post<T>(url: string, body: any, options?: any): Observable<T> {
-    return this.http.post<T>(`${this.baseUrl}${url}`, body, {
+    return this.http.post<T>(`${environment.apiUrl}${url}`, body, {
       observe: 'body',
       responseType: 'json',
       ...options,
@@ -34,7 +33,7 @@ export class HttpService {
   }
 
   put<T>(url: string, body: any, options?: any): Observable<T> {
-    return this.http.put<T>(`${this.baseUrl}${url}`, body, {
+    return this.http.put<T>(`${environment.apiUrl}${url}`, body, {
       observe: 'body',
       responseType: 'json',
       ...options,
@@ -45,7 +44,7 @@ export class HttpService {
   }
 
   delete<T>(url: string, options?: any): Observable<T> {
-    return this.http.delete<T>(`${this.baseUrl}${url}`, {
+    return this.http.delete<T>(`${environment.apiUrl}${url}`, {
       observe: 'body',
       responseType: 'json',
       ...options,
@@ -56,7 +55,7 @@ export class HttpService {
   }
 
   patch<T>(url: string, body: any, options?: any): Observable<T> {
-    return this.http.patch<T>(`${this.baseUrl}${url}`, body, {
+    return this.http.patch<T>(`${environment.apiUrl}${url}`, body, {
       observe: 'body',
       responseType: 'json',
       ...options,

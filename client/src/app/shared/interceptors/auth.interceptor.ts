@@ -12,6 +12,7 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -54,30 +55,32 @@ export class AuthInterceptor implements HttpInterceptor {
     const refreshToken = this.authService.getRefreshToken();
 
     if (refreshToken) {
-      return this.http.post<any>('/api/refresh-token', { refreshToken }).pipe(
-        switchMap((response) => {
-          const newAccessToken = response.accessToken;
-          const newRefreshToken = response.refreshToken;
+      return this.http
+        .post<any>(`${environment.apiUrl}refresh-token`, { refreshToken })
+        .pipe(
+          switchMap((response) => {
+            const newAccessToken = response.accessToken;
+            const newRefreshToken = response.refreshToken;
 
-          this.authService.setJwtToken(newAccessToken);
-          this.authService.setRefreshToken(newRefreshToken);
+            this.authService.setJwtToken(newAccessToken);
+            this.authService.setRefreshToken(newRefreshToken);
 
-          const clonedRequest = req.clone({
-            setHeaders: {
-              Authorization: `Bearer ${newAccessToken}`,
-            },
-          });
+            const clonedRequest = req.clone({
+              setHeaders: {
+                Authorization: `Bearer ${newAccessToken}`,
+              },
+            });
 
-          return next.handle(clonedRequest);
-        }),
-        catchError(() => {
-          this.authService.clearStorage();
-          this.router.navigate(['/auth/login']);
-          return throwError(
-            () => new Error('Session expired. Please log in again.')
-          );
-        })
-      );
+            return next.handle(clonedRequest);
+          }),
+          catchError(() => {
+            this.authService.clearStorage();
+            this.router.navigate(['/auth/login']);
+            return throwError(
+              () => new Error('Session expired. Please log in again.')
+            );
+          })
+        );
     } else {
       this.authService.clearStorage();
       this.router.navigate(['/auth/login']);

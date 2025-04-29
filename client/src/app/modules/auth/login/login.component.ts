@@ -45,7 +45,7 @@ export class LoginComponent {
               this.authService.setLoginData(accessToken, refreshToken, user);
             }
 
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/']);
           },
           error: (error) => {
             console.error('Błąd logowania:', error);

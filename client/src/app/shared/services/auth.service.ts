@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,7 @@ export class AuthService {
   private readonly JWT_TOKEN = 'jwt_token';
   private readonly REFRESH_TOKEN = 'refresh_token';
   private readonly USER = 'user';
+  private currentUser: User | null = null;
 
   public setJwtToken(token: string): void {
     localStorage.setItem(this.JWT_TOKEN, token);
@@ -24,12 +26,13 @@ export class AuthService {
     return localStorage.getItem(this.REFRESH_TOKEN);
   }
 
-  public setUser(user: any): void {
+  public setUser(user: User): void {
+    this.currentUser = user;
     localStorage.setItem(this.USER, JSON.stringify(user));
   }
 
   public getUser(): any {
-    return JSON.parse(localStorage.getItem(this.USER) || '{}');
+    return this.currentUser;
   }
 
   public setLoginData(token: string, refreshToken: string, user: any): void {
@@ -39,7 +42,7 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    return Boolean(localStorage.getItem(this.USER));
+    return Boolean(this.currentUser);
   }
 
   public clearStorage(): void {
