@@ -1,1 +1,74 @@
-<p>register works!</p>
+<div class="register-container">
+  <div class="register-card">
+    <h2>Rejestracja</h2>
+    <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Wprowadź email użytkownika"
+        />
+        @if (registerForm.get('email')?.invalid &&
+        registerForm.get('email')?.touched) {
+        <div class="error">Email użytkownika jest wymagany.</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Hasło</label>
+        <div class="password-wrapper">
+          <input
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Wprowadź hasło"
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+          >
+            {{ showPassword ? "Ukryj" : "Pokaż" }}
+          </button>
+        </div>
+        @if (registerForm.get('password')?.invalid &&
+        registerForm.get('password')?.touched) {
+        <div class="error">Hasło jest wymagane.</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="repeated_password">Powtórz hasło</label>
+        <div class="password-wrapper">
+          <input
+            id="repeated_password"
+            [type]="showRepeatedPassword ? 'text' : 'password'"
+            formControlName="repeated_password"
+            placeholder="Wprowadź hasło"
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="toggleRepeatedPasswordVisibility()"
+          >
+            {{ showRepeatedPassword ? "Ukryj" : "Pokaż" }}
+          </button>
+        </div>
+        @if (registerForm.get('repeated_password')?.invalid &&
+        registerForm.get('repeated_password')?.touched) {
+        <div class="error">Hasło jest wymagane.</div>
+        }
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="registerForm.invalid"
+        class="register-button"
+      >
+        Zarejestruj się
+      </button>
+    </form>
+  </div>
+</div>

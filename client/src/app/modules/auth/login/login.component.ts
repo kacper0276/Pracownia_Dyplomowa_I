@@ -6,7 +6,7 @@ import { HttpService } from '../../../shared/services/http.service';
 import { ApiResponse, LoginResponseData } from '../../../shared/models';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
