@@ -1,5 +1,7 @@
+import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../entities/base.entity';
-import { Column, Entity } from 'typeorm';
+import { Post } from '../../posts/entities/post.entity';
+import { Comment } from '../../comments/entities/comment.entity';
 
 @Entity({ name: 'users' })
 export class User extends BaseEntity {
@@ -35,4 +37,10 @@ export class User extends BaseEntity {
 
   @Column({ type: 'simple-array' })
   invitedSended: string[];
+
+  @OneToMany(() => Post, (post) => post.user)
+  posts: Post[];
+
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
 }
