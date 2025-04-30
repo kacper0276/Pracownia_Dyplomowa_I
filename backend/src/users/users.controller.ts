@@ -55,28 +55,6 @@ export class UsersController {
     }
   }
 
-  @Post('login')
-  async loginUser(@Body() loginData: LoginData, @Res() response: Response) {
-    try {
-      const res = await this.usersService.loginUser(loginData);
-
-      response.status(HttpStatus.OK).send({
-        message: 'successfully-logged-in',
-        data: res,
-      });
-    } catch (error) {
-      if (error instanceof BadRequestException) {
-        response.status(HttpStatus.BAD_REQUEST).send({
-          message: error.message,
-        });
-      } else {
-        response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
-          message: 'a-server-error-occurred',
-        });
-      }
-    }
-  }
-
   @Patch('activate-account')
   async activateAccount(
     @Query('userEmail') userEmail: string,
