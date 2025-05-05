@@ -44,9 +44,10 @@ export class AddPostComponent {
 
   onSubmit(): void {
     if (this.postForm.valid) {
+      console.log(this.authService.getUser());
       const postData = {
         ...this.postForm.value,
-        userId: this.authService.getUser().id,
+        userEmail: this.authService.getUser().email,
       };
       console.log(postData);
       this.postAdded.emit(postData);

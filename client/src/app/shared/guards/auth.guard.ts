@@ -23,7 +23,7 @@ export const authGuard: CanActivateFn = async (route, state) => {
         .toPromise();
 
       authService.setLoginData(
-        response.token,
+        response.accessToken,
         response.refreshToken,
         response.user
       );
