@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiResponse, LoginResponseData } from '../../../shared/models';
-import { AuthService } from '../../../shared/services/auth.service';
-import { HttpService } from '../../../shared/services/http.service';
+import { AuthService } from '../../../../shared/services/auth.service';
+import { HttpService } from '../../../../shared/services/http.service';
+import { ApiResponse, LoginResponseData } from '../../../../shared/models';
 
 @Component({
-  selector: 'register',
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+  selector: 'login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
-export class RegisterComponent {
-  registerForm: FormGroup;
+export class LoginComponent {
+  loginForm: FormGroup;
   showPassword = false;
-  showRepeatedPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -21,10 +20,9 @@ export class RegisterComponent {
     private authService: AuthService,
     private httpService: HttpService
   ) {
-    this.registerForm = this.fb.group({
+    this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
-      repeated_password: ['', Validators.required],
     });
   }
 
@@ -32,21 +30,12 @@ export class RegisterComponent {
     this.showPassword = !this.showPassword;
   }
 
-  toggleRepeatedPasswordVisibility(): void {
-    this.showRepeatedPassword = !this.showRepeatedPassword;
-  }
-
   onSubmit(): void {
-    if (this.registerForm.valid) {
-      const loginData = this.registerForm.value;
-
-      if (loginData.password !== loginData.repeated_password) {
-        alert('Hasła nie są takie same!');
-        return;
-      }
+    if (this.loginForm.valid) {
+      const loginData = this.loginForm.value;
 
       this.httpService
-        .post<ApiResponse<LoginResponseData>>('user/register', loginData)
+        .post<ApiResponse<LoginResponseData>>('auth/login', loginData)
         .subscribe({
           next: (response) => {
             console.log('Zalogowano pomyślnie:', response.message);

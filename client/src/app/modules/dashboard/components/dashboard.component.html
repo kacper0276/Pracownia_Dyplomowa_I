@@ -1,3 +1,23 @@
 <div class="main-container">
   <h1>Dashboard</h1>
+
+  <button class="fab" (click)="toggleShowModal()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  @if (showModal) {
+  <modal>
+    <div modal-header>
+      <h3>Create New Post</h3>
+    </div>
+    <div modal-body>
+      <add-post (postAdded)="handlePostAdded($event)"></add-post>
+    </div>
+    <div modal-footer>
+      <button (click)="toggleShowModal()" class="btn btn-secondary">
+        Close
+      </button>
+    </div>
+  </modal>
+  }
 </div>

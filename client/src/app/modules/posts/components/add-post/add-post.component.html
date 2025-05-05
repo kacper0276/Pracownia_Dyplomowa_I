@@ -1,0 +1,41 @@
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Post Name</label>
+    <input id="name" formControlName="name" type="text" class="form-control" />
+    @if (postForm.get('name')?.invalid && postForm.get('name')?.touched) {
+    <div>Post name is required.</div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      formControlName="description"
+      class="form-control"
+    ></textarea>
+    @if (postForm.get('description')?.invalid &&
+    postForm.get('description')?.touched) {
+    <div>Description is required.</div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="image">Image</label>
+    <input
+      id="image"
+      type="file"
+      class="form-control"
+      (change)="onFileSelected($event)"
+    />
+    @if (imageError) {
+    <div>
+      <small class="text-danger">{{ imageError }}</small>
+    </div>
+    }
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="postForm.invalid">
+    Add Post
+  </button>
+</form>

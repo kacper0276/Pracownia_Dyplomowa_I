@@ -6,6 +6,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -13,11 +14,13 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     SetTitleDirective,
     NotFoundComponent,
     TruncatePipe,
+    ModalComponent,
   ],
   imports: [CommonModule, HttpClientModule],
   exports: [
     CommonModule,
     SpinnerComponent,
+    ModalComponent,
     SetTitleDirective,
     MatIconModule,
     TruncatePipe,
