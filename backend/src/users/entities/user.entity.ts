@@ -14,6 +14,8 @@ export class User extends BaseEntity {
   @Column({ nullable: false })
   password: string;
 
+  // TODO: Add enum for roles
+
   @Column({ type: 'longtext' })
   profileImage: string;
 
