@@ -6,8 +6,8 @@ export class CreateCommentDto {
   content: string;
 
   @IsNotEmpty()
-  @IsInt()
-  userId: number;
+  @IsString()
+  userEmail: string;
 
   @IsNotEmpty()
   @IsInt()

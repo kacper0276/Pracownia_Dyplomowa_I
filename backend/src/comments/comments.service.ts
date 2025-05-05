@@ -46,11 +46,13 @@ export class CommentsService {
   }
 
   async create(createCommentDto: CreateCommentDto): Promise<Comment> {
-    const { userId, postId, ...commentData } = createCommentDto;
+    const { userEmail, postId, ...commentData } = createCommentDto;
 
-    const user = await this.usersRepository.findOne({ where: { id: userId } });
+    const user = await this.usersRepository.findOne({
+      where: { email: userEmail },
+    });
     if (!user) {
-      throw new NotFoundException(`User with ID ${userId} not found`);
+      throw new NotFoundException(`User with email ${userEmail} not found`);
     }
 
     const post = await this.postsRepository.findOne({ where: { id: postId } });
