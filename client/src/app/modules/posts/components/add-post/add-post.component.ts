@@ -50,6 +50,17 @@ export class AddPostComponent {
         userEmail: this.authService.getUser().email,
       };
       console.log(postData);
+      this.httpService.post('posts', postData).subscribe({
+        next: (response) => {
+          console.log('Post added successfully:', response);
+        },
+        error: (error) => {
+          console.error('Error adding post:', error);
+        },
+        complete: () => {
+          console.log('Post addition process completed.');
+        },
+      });
       this.postAdded.emit(postData);
       this.postForm.reset();
     }
