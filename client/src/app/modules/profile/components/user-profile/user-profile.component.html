@@ -1,1 +1,48 @@
-<p>user-profile works!</p>
+<div class="main-container">
+  <div class="user-profile">
+    <div class="user-profile-header">
+      <div class="user-profile-header-img">
+        <img src="../../../../../assets/img/ProfilePic.jpg" alt="Picture img" />
+        <div
+          class="active-circle"
+          [ngStyle]="
+            userProfile.isActive
+              ? { background: 'green' }
+              : { background: 'red' }
+          "
+        ></div>
+      </div>
+      <h1>{{ userProfile.name }} {{ userProfile.surname }}</h1>
+      <p>{{ userProfile.email }}</p>
+    </div>
+    <div class="user-profile-content">
+      <p>Bio: {{ userProfile.bio }}</p>
+      <p>Location</p>
+    </div>
+    <div>
+      <h2>Friends</h2>
+      <div class="friends-list">
+        <div class="friend-card" *ngFor="let friend of userProfile.friends">
+          <img
+            src="../../../../../assets/img/ProfilePic.jpg"
+            alt="Picture img"
+            width="100px"
+            height="100px"
+          />
+          <h3>{{ friend.name }} {{ friend.surname }}</h3>
+          <p>{{ friend.email }}</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>Posts</h2>
+      <div class="posts-list">
+        <div class="post-card" *ngFor="let post of userProfile.posts">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.content }}</p>
+          <p>{{ post.date | date : "short" }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

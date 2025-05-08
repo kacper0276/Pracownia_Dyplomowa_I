@@ -1,0 +1,51 @@
+.main-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  .user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+
+    .user-profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+
+      .user-profile-header-img {
+        position: relative;
+        img {
+          width: 120px;
+          height: 120px;
+          position: relative;
+          border-radius: 50%;
+          border: 1px solid #ccc;
+        }
+
+        .active-circle {
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          bottom: 0;
+          right: 10px;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    .user-profile-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+  }
+}
