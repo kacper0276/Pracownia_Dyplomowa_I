@@ -29,6 +29,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('../profile/profile.module').then((m) => m.ProfileModule),
       },
+      {
+        path: 'chats',
+        loadChildren: () =>
+          import('../chats/chats.module').then((m) => m.ChatsModule),
+      },
     ],
   },
 ];
