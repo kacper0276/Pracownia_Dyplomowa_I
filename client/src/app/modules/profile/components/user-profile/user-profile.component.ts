@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss',
 })
-export class UserProfileComponent {
+export class UserProfileComponent implements OnInit {
   userProfile = {
     email: 'Test@test.pl',
     name: 'TEST',
@@ -49,4 +50,14 @@ export class UserProfileComponent {
       },
     ],
   };
+
+  constructor(private readonly route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      const email = params['email'];
+
+      console.log('email:', email);
+    });
+  }
 }

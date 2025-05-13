@@ -17,7 +17,7 @@
       </a>
     </li>
     <li>
-      <a routerLink="/profile">
+      <a routerLink="/profile" [queryParams]="{ email: user?.email }">
         <mat-icon>person</mat-icon>
         <span>Profil</span>
       </a>
