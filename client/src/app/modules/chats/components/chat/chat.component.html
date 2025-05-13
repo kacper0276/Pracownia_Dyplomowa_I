@@ -1,1 +1,24 @@
-<p>chat works!</p>
+<div class="chat-container">
+  <div class="chat-list">
+    <h2>Twoje rozmowy</h2>
+    <ul>
+      <li
+        *ngFor="let chat of chats"
+        (click)="selectChat(chat)"
+        [class.active]="selectedChat?.id === chat.id"
+      >
+        <div class="chat-item">
+          <img [src]="chat.avatar" alt="Avatar" />
+          <div class="chat-info">
+            <h3>{{ chat.name }}</h3>
+            <p>{{ chat.lastMessage }}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="chat-room" *ngIf="selectedChat">
+    <chat-room [chat]="selectedChat"></chat-room>
+  </div>
+</div>

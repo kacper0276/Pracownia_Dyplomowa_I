@@ -1,0 +1,28 @@
+<div class="chat-room-container">
+  <div class="chat-header">
+    <img [src]="chat.avatar" alt="Avatar" />
+    <h3>{{ chat.name }}</h3>
+  </div>
+
+  <div class="chat-messages">
+    <div
+      class="message"
+      *ngFor="let message of messages"
+      [class.sent]="message.sender === 'me'"
+      [class.received]="message.sender !== 'me'"
+    >
+      <p>{{ message.text }}</p>
+      <span>{{ message.time | date : "yyyy-MM-dd HH:mm" }}</span>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input
+      type="text"
+      placeholder="Napisz wiadomość..."
+      [(ngModel)]="newMessage"
+      (keyup.enter)="sendMessage()"
+    />
+    <button (click)="sendMessage()">Wyślij</button>
+  </div>
+</div>
