@@ -24,9 +24,31 @@
     </li>
     <li>
       <a routerLink="/users">
-        <mat-icon>person</mat-icon>
+        <mat-icon>groups</mat-icon>
         <span>Użytkownicy</span>
       </a>
     </li>
+    <li>
+      <a routerLink="/chats">
+        <mat-icon>chat</mat-icon>
+        <span>Chat</span>
+      </a>
+    </li>
   </ul>
+
+  <button class="logout-button">
+    <mat-icon>logout</mat-icon>
+    <span *ngIf="!isCollapsed">Wyloguj</span>
+  </button>
+
+  <div class="language-switcher">
+    <button (click)="changeLanguage('pl')">
+      <img src="assets/icons/pl-flag.png" alt="Polski" />
+      <span *ngIf="!isCollapsed">Polski</span>
+    </button>
+    <button (click)="changeLanguage('en')">
+      <img src="assets/icons/en-flag.png" alt="English" />
+      <span *ngIf="!isCollapsed">English</span>
+    </button>
+  </div>
 </div>

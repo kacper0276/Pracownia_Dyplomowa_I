@@ -22,4 +22,6 @@ export class SideNavComponent {
     this.isCollapsed = !this.isCollapsed;
     this.toggleNav.emit(this.isCollapsed);
   }
+
+  changeLanguage(lang: string): void {}
 }

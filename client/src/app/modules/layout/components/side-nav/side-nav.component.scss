@@ -7,6 +7,27 @@
   transition: width 0.3s ease;
   overflow: hidden;
 
+  .logout-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+
+    mat-icon {
+      font-size: 24px;
+    }
+
+    &:hover {
+      color: #d32f2f;
+    }
+  }
+
   &.collapsed {
     width: 80px;
   }
@@ -62,6 +83,34 @@
           text-overflow: ellipsis;
           visibility: visible;
         }
+      }
+    }
+  }
+
+  .language-switcher {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      color: white;
+
+      img {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+      }
+
+      &:hover {
+        color: #1976d2;
       }
     }
   }
