@@ -6,10 +6,11 @@ import { User } from './entities/user.entity';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { mailerConfig } from 'src/config/mailer.config';
 import { UserStatusGateway } from './users.gateway';
+import { UserInvite } from './entities/user-invite.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, UserInvite]),
     MailerModule.forRoot(mailerConfig),
   ],
   controllers: [UsersController],
