@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { RegisterData } from './dto/register-data.dto';
 import * as bcrypt from 'bcrypt';
 import { LoginData } from './dto/login-data.dto';
@@ -131,6 +131,17 @@ export class UsersService {
     }
 
     return user;
+  }
+
+  async searchUsers(search: string): Promise<User[]> {
+    return this.userRepository.find({
+      where: [
+        { email: ILike(`%${search}%`) },
+        { firstName: ILike(`%${search}%`) },
+        { lastName: ILike(`%${search}%`) },
+        { login: ILike(`%${search}%`) },
+      ],
+    });
   }
 
   // async sendFriendRequest(senderId: number, receiverId: number): Promise<void> {

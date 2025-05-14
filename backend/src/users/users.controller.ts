@@ -101,6 +101,21 @@ export class UsersController {
     }
   }
 
+  @Get('search')
+  async searchUsers(@Query('query') query: string, @Res() response: Response) {
+    try {
+      const users = await this.usersService.searchUsers(query);
+      response.status(HttpStatus.OK).send({
+        message: 'users-found',
+        data: users,
+      });
+    } catch (error) {
+      response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: 'a-server-error-occurred',
+      });
+    }
+  }
+
   @Post(':id/send-friend-request/:receiverId')
   async sendFriendRequest(
     @Param('id', ParseIntPipe) senderId: number,
