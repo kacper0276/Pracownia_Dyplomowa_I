@@ -11,6 +11,7 @@ import { Post } from './posts/entities/post.entity';
 import { CommentsModule } from './comments/comments.module';
 import { Comment } from './comments/entities/comment.entity';
 import { UserInvite } from './users/entities/user-invite.entity';
+import { MessagesModule } from './messages/messages.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { UserInvite } from './users/entities/user-invite.entity';
     AuthModule,
     PostsModule,
     CommentsModule,
+    MessagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
