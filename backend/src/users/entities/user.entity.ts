@@ -13,6 +13,12 @@ export class User extends BaseEntity {
   login: string;
 
   @Column({ nullable: false })
+  firstName: string;
+
+  @Column({ nullable: false })
+  lastName: string;
+
+  @Column({ nullable: false })
   password: string;
 
   // TODO: Add enum for roles
