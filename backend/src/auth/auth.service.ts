@@ -20,11 +20,12 @@ export class AuthService {
   }
 
   async login(user: any) {
+    const userData = await this.usersService.findOneByEmail(user.email);
     const payload = { email: user.email, sub: user.id, role: user.role };
     const accessToken = this.jwtService.sign(payload);
     const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
     return {
-      user,
+      user: userData,
       accessToken,
       refreshToken,
     };
