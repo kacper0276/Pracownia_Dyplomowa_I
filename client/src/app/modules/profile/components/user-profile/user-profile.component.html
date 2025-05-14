@@ -38,10 +38,16 @@
     <div>
       <h2>Posts</h2>
       <div class="posts-list">
-        <div class="post-card" *ngFor="let post of userProfile.posts">
-          <h3>{{ post.title }}</h3>
-          <p>{{ post.content }}</p>
-          <p>{{ post.date | date : "short" }}</p>
+        <div class="post-card" *ngFor="let post of userData.posts">
+          <h3>{{ post.name }}</h3>
+          <p>{{ post.description }}</p>
+          <p>{{ post.createdAt | date : "short" }}</p>
+          <div
+            class="post-background"
+            [ngStyle]="{
+              'background-image': 'url(' + post.image + ')'
+            }"
+          ></div>
         </div>
       </div>
     </div>
