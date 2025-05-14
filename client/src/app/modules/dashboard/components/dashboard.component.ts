@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { UserService } from '../../../shared/services/user.service';
+import { Router } from '@angular/router';
+import { User } from '../../../shared/models';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,9 +13,12 @@ import { UserService } from '../../../shared/services/user.service';
 export class DashboardComponent implements OnInit {
   showModal = false;
   searchControl = new FormControl('');
-  users: any[] = [];
+  users: User[] = [];
 
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     this.searchControl.valueChanges
@@ -25,6 +30,16 @@ export class DashboardComponent implements OnInit {
       .subscribe((users) => {
         this.users = users.data ?? [];
       });
+  }
+
+  goToUserProfile(email: string): void {
+    this.router.navigate(['/profile'], { queryParams: { email } });
+  }
+
+  getProfileImage(user: User): string {
+    return user.profileImage
+      ? user.profileImage
+      : '../../../../assets/img/ProfilePic.jpg';
   }
 
   toggleShowModal(): void {

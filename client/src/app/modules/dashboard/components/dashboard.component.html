@@ -1,6 +1,25 @@
 <div class="main-container">
   <div class="search-container">
-    <input type="text" placeholder="Wyszukaj użytkownika" />
+    <input
+      type="text"
+      placeholder="Wyszukaj użytkownika"
+      [formControl]="searchControl"
+    />
+    @if (users.length > 0) {
+    <div class="search-results">
+      <div
+        class="user-card"
+        *ngFor="let user of users"
+        (click)="goToUserProfile(user.email)"
+      >
+        <img [src]="getProfileImage(user)" alt="User Image" />
+        <div class="user-info">
+          <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+          <p>{{ user.email }}</p>
+        </div>
+      </div>
+    </div>
+    }
   </div>
 
   <button class="fab" (click)="toggleShowModal()">
