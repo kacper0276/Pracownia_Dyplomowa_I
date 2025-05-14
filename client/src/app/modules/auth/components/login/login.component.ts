@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { HttpService } from '../../../../shared/services/http.service';
 import { ApiResponse, LoginResponseData } from '../../../../shared/models';
+import { WebSocketService } from '../../../../shared/services/web-socker.service';
 
 @Component({
   selector: 'login',
@@ -15,10 +16,11 @@ export class LoginComponent {
   showPassword = false;
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private authService: AuthService,
-    private httpService: HttpService
+    private readonly fb: FormBuilder,
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly httpService: HttpService,
+    private readonly webSocketService: WebSocketService
   ) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -43,6 +45,7 @@ export class LoginComponent {
             if (response.data) {
               const { accessToken, refreshToken, user } = response.data;
               this.authService.setLoginData(accessToken, refreshToken, user);
+              this.webSocketService.connect(user.id.toString());
             }
 
             this.router.navigate(['/']);

@@ -4,11 +4,13 @@ import { AuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { firstValueFrom } from 'rxjs';
+import { WebSocketService } from '../services/web-socker.service';
 
 export const authGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
   const http = inject(HttpClient);
+  const webSocketService = inject(WebSocketService);
 
   if (authService.isLoggedIn()) {
     return true;
@@ -28,6 +30,8 @@ export const authGuard: CanActivateFn = async (route, state) => {
         response.refreshToken,
         response.user
       );
+
+      webSocketService.connect(response.user.id.toString());
 
       return true;
     } catch (error) {

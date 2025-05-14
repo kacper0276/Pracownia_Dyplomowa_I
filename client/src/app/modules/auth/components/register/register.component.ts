@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiResponse, LoginResponseData } from '../../../../shared/models';
-import { AuthService } from '../../../../shared/services/auth.service';
 import { HttpService } from '../../../../shared/services/http.service';
 
 @Component({
@@ -18,7 +17,6 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService,
     private httpService: HttpService
   ) {
     this.registerForm = this.fb.group({
@@ -49,14 +47,7 @@ export class RegisterComponent {
         .post<ApiResponse<LoginResponseData>>('user/register', loginData)
         .subscribe({
           next: (response) => {
-            console.log('Zalogowano pomyślnie:', response.message);
-
-            if (response.data) {
-              const { accessToken, refreshToken, user } = response.data;
-              this.authService.setLoginData(accessToken, refreshToken, user);
-            }
-
-            this.router.navigate(['/']);
+            this.router.navigate(['/login']);
           },
           error: (error) => {
             console.error('Błąd logowania:', error);
