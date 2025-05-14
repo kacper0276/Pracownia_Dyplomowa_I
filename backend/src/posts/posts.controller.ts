@@ -60,6 +60,24 @@ export class PostsController {
     }
   }
 
+  @Get('user/:userId')
+  async getPostsByUserId(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Res() response: Response,
+  ) {
+    try {
+      const posts = await this.postsService.findByUserId(userId);
+      response.status(HttpStatus.OK).send({
+        message: 'posts-retrieved',
+        data: posts,
+      });
+    } catch (error) {
+      response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: 'internal-server-error',
+      });
+    }
+  }
+
   @Post()
   async createPost(
     @Body() createPostDto: CreatePostDto,
