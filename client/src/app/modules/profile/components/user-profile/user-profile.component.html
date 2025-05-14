@@ -1,4 +1,5 @@
 <div class="main-container">
+  @if (userData) {
   <div class="user-profile">
     <div class="user-profile-header">
       <div class="user-profile-header-img">
@@ -45,4 +46,7 @@
       </div>
     </div>
   </div>
+  } @else {
+  <h1>Nie udało się pobrać danych użytkownika</h1>
+  }
 </div>

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { HttpService } from '../../../../shared/services/http.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'add-post',
@@ -16,7 +17,8 @@ export class AddPostComponent {
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
-    private readonly httpService: HttpService
+    private readonly httpService: HttpService,
+    private readonly toast: ToastrService
   ) {
     this.postForm = this.fb.group({
       name: ['', Validators.required],
@@ -51,14 +53,11 @@ export class AddPostComponent {
       };
       console.log(postData);
       this.httpService.post('posts', postData).subscribe({
-        next: (response) => {
-          console.log('Post added successfully:', response);
+        next: () => {
+          this.toast.success('Post added successfully');
         },
-        error: (error) => {
-          console.error('Error adding post:', error);
-        },
-        complete: () => {
-          console.log('Post addition process completed.');
+        error: () => {
+          this.toast.error('Error adding post');
         },
       });
       this.postAdded.emit(postData);

@@ -3,6 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { firstValueFrom } from 'rxjs';
 
 export const authGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
@@ -18,9 +19,9 @@ export const authGuard: CanActivateFn = async (route, state) => {
         throw new Error('Brak refresh tokena');
       }
 
-      const response: any = await http
-        .post(`${environment.apiUrl}auth/refresh`, { refreshToken })
-        .toPromise();
+      const response: any = await firstValueFrom(
+        http.post(`${environment.apiUrl}auth/refresh`, { refreshToken })
+      );
 
       authService.setLoginData(
         response.accessToken,
