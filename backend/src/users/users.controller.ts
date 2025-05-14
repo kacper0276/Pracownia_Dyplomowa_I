@@ -15,7 +15,6 @@ import {
 import { UsersService } from './users.service';
 import { Response } from 'express';
 import { RegisterData } from './dto/register-data.dto';
-import { LoginData } from './dto/login-data.dto';
 
 @Controller('users')
 export class UsersController {
