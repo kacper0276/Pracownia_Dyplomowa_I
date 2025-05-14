@@ -1,8 +1,8 @@
 import { InviteStatus } from '../enums/invite-status.enum';
+import { BaseModel } from './base.model';
 import { User } from './user.model';
 
-export interface UserInvite {
-  id: number;
+export interface UserInvite extends BaseModel {
   recipientId: number;
   senderId: number;
   status: InviteStatus;

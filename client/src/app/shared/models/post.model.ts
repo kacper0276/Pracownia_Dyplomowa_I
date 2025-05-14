@@ -1,7 +1,7 @@
+import { BaseModel } from './base.model';
 import { User } from './user.model';
 
-export interface Post {
-  id: number;
+export interface Post extends BaseModel {
   name: string;
   description: string;
   image?: string;

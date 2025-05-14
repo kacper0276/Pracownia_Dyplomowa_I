@@ -1,5 +1,6 @@
-export interface User {
-  id: number;
+import { BaseModel } from './base.model';
+
+export interface User extends BaseModel {
   email: string;
   login: string;
   firstName?: string;
