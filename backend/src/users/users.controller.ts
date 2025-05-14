@@ -109,7 +109,7 @@ export class UsersController {
     @Res() response: Response,
   ) {
     try {
-      await this.usersService.sendFriendRequest(senderId, receiverId);
+      // await this.usersService.sendFriendRequest(senderId, receiverId);
 
       response.status(HttpStatus.OK).send({
         message: 'friend-request-sent',
@@ -139,7 +139,7 @@ export class UsersController {
     @Res() response: Response,
   ): Promise<void> {
     try {
-      await this.usersService.acceptFriendRequest(userId, senderId, accept);
+      // await this.usersService.acceptFriendRequest(userId, senderId, accept);
 
       response.status(HttpStatus.OK).send({
         message: accept ? 'friend-request-accepted' : 'friend-request-declined',

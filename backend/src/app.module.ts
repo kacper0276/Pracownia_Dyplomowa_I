@@ -10,6 +10,7 @@ import { PostsModule } from './posts/posts.module';
 import { Post } from './posts/entities/post.entity';
 import { CommentsModule } from './comments/comments.module';
 import { Comment } from './comments/entities/comment.entity';
+import { UserInvite } from './users/entities/user-invite.entity';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { Comment } from './comments/entities/comment.entity';
       username: process.env.DB_USER || 'root',
       password: process.env.DB_PASSWORD || 'root',
       database: process.env.DB_NAME || 'test',
-      entities: [User, Post, Comment],
+      entities: [User, Post, Comment, UserInvite],
       synchronize: true,
       migrations: ['../migrations/**/*.ts'],
       migrationsTableName: 'migrations_typeorm',

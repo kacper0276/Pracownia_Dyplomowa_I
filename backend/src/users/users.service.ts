@@ -220,55 +220,55 @@ export class UsersService {
     return user;
   }
 
-  async sendFriendRequest(senderId: number, receiverId: number): Promise<void> {
-    const sender = await this.findOneById(senderId);
-    const receiver = await this.findOneById(receiverId);
+  // async sendFriendRequest(senderId: number, receiverId: number): Promise<void> {
+  //   const sender = await this.findOneById(senderId);
+  //   const receiver = await this.findOneById(receiverId);
 
-    if (!sender || !receiver) {
-      throw new NotFoundException('User not found');
-    }
+  //   if (!sender || !receiver) {
+  //     throw new NotFoundException('User not found');
+  //   }
 
-    if (receiver.invitedFriends.includes(senderId.toString())) {
-      throw new BadRequestException('Friend request already sent');
-    }
+  //   if (receiver.invitedFriends.includes(senderId.toString())) {
+  //     throw new BadRequestException('Friend request already sent');
+  //   }
 
-    receiver.invitedFriends.push(senderId.toString());
-    await this.userRepository.save(receiver);
-  }
+  //   receiver.invitedFriends.push(senderId.toString());
+  //   await this.userRepository.save(receiver);
+  // }
 
-  async acceptFriendRequest(
-    userId: number,
-    senderId: number,
-    accept: boolean,
-  ): Promise<void> {
-    const user = await this.findOneById(userId);
-    const sender = await this.findOneById(senderId);
+  // async acceptFriendRequest(
+  //   userId: number,
+  //   senderId: number,
+  //   accept: boolean,
+  // ): Promise<void> {
+  //   const user = await this.findOneById(userId);
+  //   const sender = await this.findOneById(senderId);
 
-    if (!user.invitedFriends.includes(senderId.toString())) {
-      throw new BadRequestException('No friend request from this user');
-    }
+  //   if (!user.invitedFriends.includes(senderId.toString())) {
+  //     throw new BadRequestException('No friend request from this user');
+  //   }
 
-    user.invitedFriends = user.invitedFriends.filter(
-      (id) => id !== senderId.toString(),
-    );
+  //   user.invitedFriends = user.invitedFriends.filter(
+  //     (id) => id !== senderId.toString(),
+  //   );
 
-    if (accept) {
-      user.friendsId.push(senderId.toString());
-      sender.friendsId.push(userId.toString());
+  //   if (accept) {
+  //     user.friendsId.push(senderId.toString());
+  //     sender.friendsId.push(userId.toString());
 
-      await this.userRepository.save(user);
-      await this.userRepository.save(sender);
-    }
-  }
+  //     await this.userRepository.save(user);
+  //     await this.userRepository.save(sender);
+  //   }
+  // }
 
-  async likePost(userId: number, postId: string): Promise<void> {
-    const user = await this.findOneById(userId);
+  // async likePost(userId: number, postId: string): Promise<void> {
+  //   const user = await this.findOneById(userId);
 
-    if (user.likedPost.includes(postId)) {
-      throw new BadRequestException('Post already liked');
-    }
+  //   if (user.likedPost.includes(postId)) {
+  //     throw new BadRequestException('Post already liked');
+  //   }
 
-    user.likedPost.push(postId);
-    await this.userRepository.save(user);
-  }
+  //   user.likedPost.push(postId);
+  //   await this.userRepository.save(user);
+  // }
 }
