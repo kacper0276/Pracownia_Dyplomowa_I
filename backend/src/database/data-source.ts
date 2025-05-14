@@ -4,6 +4,8 @@ import { User } from '../users/entities/user.entity';
 import { Post } from '../posts/entities/post.entity';
 import { Comment } from '../comments/entities/comment.entity';
 import { UserInvite } from '../users/entities/user-invite.entity';
+import { Conversation } from '../conversations/entities/conversation.entity';
+import { Message } from '../messages/entities/message.entity';
 
 dotenv.config();
 
@@ -16,7 +18,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME || 'test',
   synchronize: false,
   logging: true,
-  entities: [User, Post, Comment, UserInvite],
+  entities: [User, Post, Comment, UserInvite, Message, Conversation],
   migrations: ['migrations/**/*.ts'],
   migrationsTableName: 'migrations_typeorm',
 });

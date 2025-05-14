@@ -3,6 +3,8 @@ import { BaseEntity } from '../../entities/base.entity';
 import { Post } from '../../posts/entities/post.entity';
 import { Comment } from '../../comments/entities/comment.entity';
 import { UserInvite } from './user-invite.entity';
+import { Conversation } from '../../conversations/entities/conversation.entity';
+import { Message } from '../../messages/entities/message.entity';
 
 @Entity({ name: 'users' })
 export class User extends BaseEntity {
@@ -62,4 +64,10 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Comment, (comment) => comment.user)
   comments: Comment[];
+
+  @ManyToMany(() => Conversation, (conversation) => conversation.participants)
+  conversations: Conversation[];
+
+  @OneToMany(() => Message, (message) => message.sender)
+  messages: Message[];
 }

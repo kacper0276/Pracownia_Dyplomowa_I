@@ -12,6 +12,9 @@ import { CommentsModule } from './comments/comments.module';
 import { Comment } from './comments/entities/comment.entity';
 import { UserInvite } from './users/entities/user-invite.entity';
 import { MessagesModule } from './messages/messages.module';
+import { ConversationsModule } from './conversations/conversations.module';
+import { Message } from './messages/entities/message.entity';
+import { Conversation } from './conversations/entities/conversation.entity';
 
 @Module({
   imports: [
@@ -23,7 +26,7 @@ import { MessagesModule } from './messages/messages.module';
       username: process.env.DB_USER || 'root',
       password: process.env.DB_PASSWORD || 'root',
       database: process.env.DB_NAME || 'test',
-      entities: [User, Post, Comment, UserInvite],
+      entities: [User, Post, Comment, UserInvite, Message, Conversation],
       synchronize: true,
       migrations: ['../migrations/**/*.ts'],
       migrationsTableName: 'migrations_typeorm',
@@ -33,6 +36,7 @@ import { MessagesModule } from './messages/messages.module';
     PostsModule,
     CommentsModule,
     MessagesModule,
+    ConversationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
