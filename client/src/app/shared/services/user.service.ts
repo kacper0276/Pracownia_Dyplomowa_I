@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { ApiResponse, User } from '../models';
+import { User } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ export class UserService {
   constructor(private readonly http: HttpService) {}
 
   searchUsers(query: string) {
-    return this.http.get<any[]>(`users/search`, {
+    return this.http.get<User[]>(`users/search`, {
       params: { query },
     });
   }
