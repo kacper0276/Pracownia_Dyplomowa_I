@@ -16,10 +16,20 @@ export class InvitesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadInvites();
+  }
+
+  loadInvites(): void {
     this.userService.getInvites(this.authService.getUserId()).subscribe({
       next: (res) => {
         this.userInvites = res.data ?? [];
       },
     });
+  }
+
+  removeInvite(inviteId: number): void {
+    this.userInvites = this.userInvites.filter(
+      (invite) => invite.id !== inviteId
+    );
   }
 }

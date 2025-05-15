@@ -5,7 +5,7 @@
     <p class="time-sent">Wysłano: {{ invite.createdAt | timeAgo }}</p>
   </div>
   <div class="invite-actions">
-    <button class="accept-btn" (click)="acceptInvite()">Akceptuj</button>
-    <button class="decline-btn" (click)="declineInvite()">Odrzuć</button>
+    <button class="accept-btn" (click)="requestInvite(true)">Akceptuj</button>
+    <button class="decline-btn" (click)="requestInvite(false)">Odrzuć</button>
   </div>
 </div>

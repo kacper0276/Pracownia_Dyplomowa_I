@@ -1,0 +1,32 @@
+@use "../../../../styles/variables.scss" as *;
+
+.invites-container {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: $white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: $black;
+    margin-bottom: 20px;
+  }
+
+  .invites-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .invite-item {
+      &:hover {
+        transform: scale(1.02);
+        transition: transform 0.2s ease-in-out;
+      }
+    }
+  }
+}

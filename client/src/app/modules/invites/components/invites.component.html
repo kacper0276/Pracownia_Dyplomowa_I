@@ -1,1 +1,11 @@
-<p>invites works!</p>
+<div class="invites-container">
+  <h2>Twoje zaproszenia</h2>
+  <div class="invites-list">
+    <invite
+      *ngFor="let invite of userInvites"
+      [invite]="invite"
+      (onRequestInvite)="removeInvite(invite.id)"
+      class="invite-item"
+    ></invite>
+  </div>
+</div>

@@ -20,14 +20,21 @@ export class UserService {
     });
   }
 
-  sendInvite(id: number, receiverId: number) {
+  sendInvite(senderId: number, receiverId: number) {
     return this.http.post<UserInvite>(
-      `users/${id}/send-friend-request/${receiverId}`,
+      `users/${senderId}/send-friend-request/${receiverId}`,
       {}
     );
   }
 
   getInvites(userId: number) {
     return this.http.get<UserInvite[]>(`users/invites/${userId}`);
+  }
+
+  respondInvite(senderId: number, receiverId: number, accept: boolean) {
+    return this.http.patch<null>(
+      `users/${receiverId}/respond-friend-request/${senderId}`,
+      accept
+    );
   }
 }

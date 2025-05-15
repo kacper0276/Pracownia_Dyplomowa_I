@@ -58,7 +58,7 @@
 
     p {
       margin: 5px 0 0;
-      color: $gray-500;
+      color: $black;
       font-size: 14px;
     }
   }
@@ -66,7 +66,7 @@
   .user-profile-content {
     p {
       margin: 5px 0;
-      color: $gray-600;
+      color: $black;
       font-size: 16px;
 
       &:first-child {
@@ -87,7 +87,7 @@
   h2 {
     font-size: 20px;
     font-weight: bold;
-    color: $gray-500;
+    color: $black;
     margin-bottom: 10px;
   }
 
@@ -119,12 +119,12 @@
         font-size: 16px;
         font-weight: bold;
         margin: 5px 0;
-        color: $gray-500;
+        color: $black;
       }
 
       p {
         font-size: 14px;
-        color: $gray-600;
+        color: $black;
         margin: 0;
       }
     }
@@ -145,17 +145,17 @@
         font-size: 18px;
         font-weight: bold;
         margin: 0 0 10px;
-        color: $gray-500;
+        color: $black;
       }
 
       p {
         font-size: 14px;
-        color: $gray-600;
+        color: $black;
         margin: 5px 0;
 
         &:last-child {
           font-size: 12px;
-          color: $gray-100;
+          color: $black;
         }
       }
     }

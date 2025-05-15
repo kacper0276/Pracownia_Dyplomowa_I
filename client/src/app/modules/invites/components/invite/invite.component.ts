@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UserInvite } from '../../../../shared/models';
+import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
   selector: 'invite',
@@ -8,8 +9,26 @@ import { UserInvite } from '../../../../shared/models';
 })
 export class InviteComponent {
   @Input() invite!: UserInvite;
+  @Output() onRequestInvite = new EventEmitter<void>();
 
-  acceptInvite(): void {}
+  constructor(private readonly userService: UserService) {}
 
-  declineInvite(): void {}
+  requestInvite(acceptInvite: boolean): void {
+    this.userService
+      .respondInvite(
+        this.invite.sender.id,
+        this.invite.receiver.id,
+        acceptInvite
+      )
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+
+          this.onRequestInvite.emit();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
 }
