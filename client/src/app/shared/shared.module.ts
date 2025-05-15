@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { ModalComponent } from './components/modal/modal.component';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ModalComponent } from './components/modal/modal.component';
     NotFoundComponent,
     TruncatePipe,
     ModalComponent,
+    TimeAgoPipe,
   ],
   imports: [CommonModule, HttpClientModule],
   exports: [
@@ -24,6 +26,7 @@ import { ModalComponent } from './components/modal/modal.component';
     SetTitleDirective,
     MatIconModule,
     TruncatePipe,
+    TimeAgoPipe,
   ],
 })
 export class SharedModule {}
