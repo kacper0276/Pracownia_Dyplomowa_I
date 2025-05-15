@@ -11,11 +11,15 @@ import * as bcrypt from 'bcrypt';
 import { LoginData } from './dto/login-data.dto';
 import { MailerService } from '@nestjs-modules/mailer';
 import { getActivationEmailTemplate } from './templates/activation-email.template';
+import { UserInvite } from './entities/user-invite.entity';
+import { InviteStatus } from 'src/enums/invite-status.enum';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(UserInvite)
+    private readonly userInviteRepository: Repository<UserInvite>,
     private readonly mailerService: MailerService,
   ) {}
 
@@ -144,46 +148,61 @@ export class UsersService {
     });
   }
 
-  // async sendFriendRequest(senderId: number, receiverId: number): Promise<void> {
-  //   const sender = await this.findOneById(senderId);
-  //   const receiver = await this.findOneById(receiverId);
+  async sendFriendRequest(
+    senderId: number,
+    receiverId: number,
+  ): Promise<UserInvite> {
+    const sender = await this.findOneById(senderId);
+    const receiver = await this.findOneById(receiverId);
 
-  //   if (!sender || !receiver) {
-  //     throw new NotFoundException('User not found');
-  //   }
+    if (!sender || !receiver) {
+      throw new NotFoundException('User not found');
+    }
 
-  //   if (receiver.invitedFriends.includes(senderId.toString())) {
-  //     throw new BadRequestException('Friend request already sent');
-  //   }
+    const existingInvite = await this.userInviteRepository.findOne({
+      where: { sender: { id: senderId }, receiver: { id: receiverId } },
+    });
 
-  //   receiver.invitedFriends.push(senderId.toString());
-  //   await this.userRepository.save(receiver);
-  // }
+    if (existingInvite) {
+      throw new BadRequestException('Friend request already sent');
+    }
 
-  // async acceptFriendRequest(
-  //   userId: number,
-  //   senderId: number,
-  //   accept: boolean,
-  // ): Promise<void> {
-  //   const user = await this.findOneById(userId);
-  //   const sender = await this.findOneById(senderId);
+    const invite = new UserInvite();
+    invite.sender = sender;
+    invite.receiver = receiver;
 
-  //   if (!user.invitedFriends.includes(senderId.toString())) {
-  //     throw new BadRequestException('No friend request from this user');
-  //   }
+    return await this.userInviteRepository.save(invite);
+  }
 
-  //   user.invitedFriends = user.invitedFriends.filter(
-  //     (id) => id !== senderId.toString(),
-  //   );
+  async respondToFriendRequest(
+    receiverId: number,
+    senderId: number,
+    accept: boolean,
+  ): Promise<void> {
+    const invite = await this.userInviteRepository.findOne({
+      where: { sender: { id: senderId }, receiver: { id: receiverId } },
+      relations: ['sender', 'receiver'],
+    });
 
-  //   if (accept) {
-  //     user.friendsId.push(senderId.toString());
-  //     sender.friendsId.push(userId.toString());
+    if (!invite) {
+      throw new BadRequestException('Friend request not found');
+    }
 
-  //     await this.userRepository.save(user);
-  //     await this.userRepository.save(sender);
-  //   }
-  // }
+    if (accept) {
+      const sender = invite.sender;
+      const receiver = invite.receiver;
+
+      sender.friends.push(receiver);
+      receiver.friends.push(sender);
+
+      await this.userRepository.save(sender);
+      await this.userRepository.save(receiver);
+    }
+
+    invite.status = accept ? InviteStatus.ACCEPTED : InviteStatus.REJECTED;
+
+    await this.userInviteRepository.save(invite);
+  }
 
   // async likePost(userId: number, postId: string): Promise<void> {
   //   const user = await this.findOneById(userId);

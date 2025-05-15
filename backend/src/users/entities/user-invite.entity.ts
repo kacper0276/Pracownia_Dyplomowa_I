@@ -8,7 +8,7 @@ export class UserInvite extends BaseEntity {
   @ManyToOne(() => User, (user) => user.receivedInvites, {
     onDelete: 'CASCADE',
   })
-  recipient: User;
+  receiver: User;
 
   @ManyToOne(() => User, (user) => user.sentInvites, { onDelete: 'CASCADE' })
   sender: User;

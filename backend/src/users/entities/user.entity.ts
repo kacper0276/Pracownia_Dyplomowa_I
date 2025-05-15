@@ -25,10 +25,10 @@ export class User extends BaseEntity {
 
   // TODO: Add enum for roles
 
-  @Column({ type: 'longtext' })
+  @Column({ type: 'longtext', nullable: true })
   profileImage: string;
 
-  @Column({ type: 'longtext' })
+  @Column({ type: 'longtext', nullable: true })
   backgroundImage: string;
 
   @Column({ default: false })
@@ -56,7 +56,7 @@ export class User extends BaseEntity {
   @OneToMany(() => UserInvite, (invite) => invite.sender)
   sentInvites: UserInvite[];
 
-  @OneToMany(() => UserInvite, (invite) => invite.recipient)
+  @OneToMany(() => UserInvite, (invite) => invite.receiver)
   receivedInvites: UserInvite[];
 
   @OneToMany(() => Post, (post) => post.user)

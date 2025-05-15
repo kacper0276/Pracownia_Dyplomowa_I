@@ -123,10 +123,14 @@ export class UsersController {
     @Res() response: Response,
   ) {
     try {
-      // await this.usersService.sendFriendRequest(senderId, receiverId);
+      const resp = await this.usersService.sendFriendRequest(
+        senderId,
+        receiverId,
+      );
 
       response.status(HttpStatus.OK).send({
         message: 'friend-request-sent',
+        data: resp,
       });
     } catch (error) {
       if (error instanceof BadRequestException) {
@@ -145,7 +149,7 @@ export class UsersController {
     }
   }
 
-  @Post(':id/accept-friend-request/:senderId')
+  @Patch(':id/respond-friend-request/:senderId')
   async acceptFriendRequest(
     @Param('id', ParseIntPipe) userId: number,
     @Param('senderId', ParseIntPipe) senderId: number,
@@ -153,7 +157,7 @@ export class UsersController {
     @Res() response: Response,
   ): Promise<void> {
     try {
-      // await this.usersService.acceptFriendRequest(userId, senderId, accept);
+      await this.usersService.respondToFriendRequest(userId, senderId, accept);
 
       response.status(HttpStatus.OK).send({
         message: accept ? 'friend-request-accepted' : 'friend-request-declined',
