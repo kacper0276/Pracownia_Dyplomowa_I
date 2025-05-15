@@ -30,14 +30,14 @@
     <div>
       <h2>Friends</h2>
       <div class="friends-list">
-        <div class="friend-card" *ngFor="let friend of userProfile.friends">
+        <div class="friend-card" *ngFor="let friend of userData.friends">
           <img
             src="../../../../../assets/img/ProfilePic.jpg"
             alt="Picture img"
             width="100px"
             height="100px"
           />
-          <h3>{{ friend.name }} {{ friend.surname }}</h3>
+          <h3>{{ getFriednsName(friend) }}</h3>
           <p>{{ friend.email }}</p>
         </div>
       </div>

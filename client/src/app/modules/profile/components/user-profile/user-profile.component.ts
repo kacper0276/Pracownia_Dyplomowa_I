@@ -90,9 +90,15 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUserDisplayName(): string {
-    return this.userData.firstName
+    return this.userData.firstName && this.userData.lastName
       ? `${this.userData.firstName} ${this.userData.lastName}`
       : this.userData.login;
+  }
+
+  getFriednsName(friendData: User): string {
+    return friendData.firstName && friendData.lastName
+      ? `${friendData.firstName} ${friendData.lastName}`
+      : friendData.login;
   }
 
   sendInvite(senderId: number, receiverId: number) {
