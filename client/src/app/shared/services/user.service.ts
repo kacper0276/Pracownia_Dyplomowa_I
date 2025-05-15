@@ -34,7 +34,7 @@ export class UserService {
   respondInvite(senderId: number, receiverId: number, accept: boolean) {
     return this.http.patch<null>(
       `users/${receiverId}/respond-friend-request/${senderId}`,
-      accept
+      { accept }
     );
   }
 }

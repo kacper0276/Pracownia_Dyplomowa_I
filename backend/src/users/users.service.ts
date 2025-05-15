@@ -185,7 +185,7 @@ export class UsersService {
   ): Promise<void> {
     const invite = await this.userInviteRepository.findOne({
       where: { sender: { id: senderId }, receiver: { id: receiverId } },
-      relations: ['sender', 'receiver'],
+      relations: ['sender', 'sender.friends', 'receiver', 'receiver.friends'],
     });
 
     if (!invite) {
