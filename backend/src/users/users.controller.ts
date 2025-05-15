@@ -15,10 +15,14 @@ import {
 import { UsersService } from './users.service';
 import { Response } from 'express';
 import { RegisterData } from './dto/register-data.dto';
+import { UserInvitesService } from './user-invites.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly userInvitesService: UserInvitesService,
+  ) {}
 
   @Get('all')
   async getAllUsers(@Res() response: Response) {
@@ -108,6 +112,26 @@ export class UsersController {
       response.status(HttpStatus.OK).send({
         message: 'users-found',
         data: users,
+      });
+    } catch (error) {
+      response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: 'a-server-error-occurred',
+      });
+    }
+  }
+
+  @Get('invites/:userId')
+  async getInvites(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Res() response: Response,
+  ) {
+    try {
+      const res =
+        await this.userInvitesService.getPendingInvitesForReceiver(userId);
+
+      response.status(HttpStatus.OK).send({
+        message: 'invites-found',
+        data: res,
       });
     } catch (error) {
       response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({

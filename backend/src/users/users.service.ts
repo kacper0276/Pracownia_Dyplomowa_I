@@ -127,6 +127,10 @@ export class UsersService {
         'likedPosts',
         'sentInvites',
         'receivedInvites',
+        'sentInvites.sender',
+        'sentInvites.receiver',
+        'receivedInvites.sender',
+        'receivedInvites.receiver',
       ],
     });
 
