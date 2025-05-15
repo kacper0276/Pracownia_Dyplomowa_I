@@ -13,6 +13,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { getActivationEmailTemplate } from './templates/activation-email.template';
 import { UserInvite } from './entities/user-invite.entity';
 import { InviteStatus } from 'src/enums/invite-status.enum';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -115,6 +116,20 @@ export class UsersService {
 
   async updateUserStatus(userId: number, isOnline: boolean): Promise<void> {
     await this.userRepository.update({ id: userId }, { isOnline });
+  }
+
+  async updateUser(id: number, dto: UpdateUserDto) {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (dto.password) {
+      dto.password = await this.hashPassword(dto.password);
+    }
+
+    Object.assign(user, dto);
+    return await this.userRepository.save(user);
   }
 
   async findOneByEmail(email: string): Promise<User> {
