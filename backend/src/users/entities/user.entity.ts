@@ -5,6 +5,7 @@ import { Comment } from '../../comments/entities/comment.entity';
 import { UserInvite } from './user-invite.entity';
 import { Conversation } from '../../conversations/entities/conversation.entity';
 import { Message } from '../../messages/entities/message.entity';
+import { Role } from '../../enums/role.enum';
 
 @Entity({ name: 'users' })
 export class User extends BaseEntity {
@@ -23,7 +24,8 @@ export class User extends BaseEntity {
   @Column({ nullable: false })
   password: string;
 
-  // TODO: Add enum for roles
+  @Column({ type: 'enum', enum: Role, default: Role.USER })
+  role: Role;
 
   @Column({ type: 'longtext', nullable: true })
   profileImage: string;
