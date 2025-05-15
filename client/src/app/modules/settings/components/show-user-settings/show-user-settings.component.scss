@@ -1,0 +1,104 @@
+@use "../../../../../styles/variables.scss" as *;
+
+.settings-container {
+  max-width: 500px;
+  margin: 10px auto;
+  padding: 32px 24px;
+  background: $white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+
+  h2 {
+    text-align: center;
+    margin-bottom: 28px;
+    color: $blue-700;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .password-group {
+    .password-wrapper {
+      display: flex;
+      align-items: center;
+
+      input {
+        flex: 1;
+      }
+
+      .toggle-password {
+        margin-left: 8px;
+        padding: 6px 12px;
+        font-size: 13px;
+        border: none;
+        background: $gray-100;
+        border-radius: 4px;
+        cursor: pointer;
+        color: $black-100;
+        transition: background 0.2s;
+
+        &:hover {
+          background: $gray-100;
+        }
+      }
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+      font-weight: 500;
+      color: $black-100;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      padding: 8px 10px;
+      border: 1px solid $gray-100;
+      border-radius: 4px;
+      font-size: 15px;
+    }
+
+    input[type="file"] {
+      margin-top: 4px;
+    }
+
+    .preview-img {
+      margin-top: 8px;
+      max-width: 120px;
+      max-height: 120px;
+      border-radius: 8px;
+      border: 1px solid $gray-100;
+      object-fit: cover;
+      background: $gray-300;
+    }
+  }
+
+  button[type="submit"] {
+    margin-top: 18px;
+    padding: 10px 0;
+    background: $blue-500;
+    color: $white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover:enabled {
+      background: $blue-700;
+    }
+
+    &:disabled {
+      background: $gray-300;
+      cursor: not-allowed;
+    }
+  }
+}

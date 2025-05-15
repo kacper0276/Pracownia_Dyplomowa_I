@@ -1,1 +1,68 @@
-<p>show-user-settings works!</p>
+<div class="settings-container">
+  <h2>Ustawienia użytkownika</h2>
+  <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firstName">Imię</label>
+      <input id="firstName" formControlName="firstName" type="text" />
+    </div>
+    <div class="form-group">
+      <label for="lastName">Nazwisko</label>
+      <input id="lastName" formControlName="lastName" type="text" />
+    </div>
+    <div class="form-group">
+      <label for="login">Login</label>
+      <input id="login" formControlName="login" type="text" />
+    </div>
+    <div class="form-group password-group">
+      <label for="password">Nowe hasło</label>
+      <div class="password-wrapper">
+        <input
+          id="password"
+          formControlName="password"
+          [type]="showPassword ? 'text' : 'password'"
+        />
+        <button
+          type="button"
+          class="toggle-password"
+          (click)="showPassword = !showPassword"
+          [attr.aria-label]="showPassword ? 'Ukryj hasło' : 'Pokaż hasło'"
+        >
+          {{ showPassword ? "Ukryj" : "Pokaż" }}
+        </button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="profileImage">Zdjęcie profilowe</label>
+      <input
+        id="profileImage"
+        type="file"
+        (change)="onFileChange($event, 'profileImage')"
+        accept="image/*"
+      />
+      <img
+        *ngIf="profileImageBase64"
+        [src]="profileImageBase64"
+        alt="Profilowe"
+        class="preview-img"
+      />
+    </div>
+    <div class="form-group">
+      <label for="backgroundImage">Zdjęcie tła</label>
+      <input
+        id="backgroundImage"
+        type="file"
+        (change)="onFileChange($event, 'backgroundImage')"
+        accept="image/*"
+      />
+      <img
+        *ngIf="backgroundImageBase64"
+        [src]="backgroundImageBase64"
+        alt="Tło"
+        class="preview-img"
+      />
+    </div>
+    <button type="submit" [disabled]="settingsForm.invalid">
+      Zapisz zmiany
+    </button>
+  </form>
+</div>
