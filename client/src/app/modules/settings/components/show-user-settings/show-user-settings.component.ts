@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { UserService } from '../../../../shared/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-show-user-settings',
@@ -15,7 +17,9 @@ export class ShowUserSettingsComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly userService: UserService,
+    private readonly toast: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +59,18 @@ export class ShowUserSettingsComponent implements OnInit {
   onSubmit(): void {
     if (this.settingsForm.valid) {
       const formValue = this.settingsForm.value;
+      const user = this.authService.getUser();
+      if (!user) return;
+
+      this.userService.updateUserData(user.id, formValue).subscribe({
+        next: (updatedUser) => {
+          if (updatedUser.data) this.authService.setUser(updatedUser.data);
+          this.toast.success('Pomyślnie zmieniono dane użytkownika');
+        },
+        error: () => {
+          this.toast.error('Wystąpił błąd podczas aktualizacji danych.');
+        },
+      });
     }
   }
 }

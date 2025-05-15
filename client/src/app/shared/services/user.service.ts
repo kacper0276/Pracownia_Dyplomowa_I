@@ -27,6 +27,10 @@ export class UserService {
     );
   }
 
+  updateUserData(userId: number, data: Partial<User>) {
+    return this.http.patch<User>(`users/${userId}`, data);
+  }
+
   getInvites(userId: number) {
     return this.http.get<UserInvite[]>(`users/invites/${userId}`);
   }
