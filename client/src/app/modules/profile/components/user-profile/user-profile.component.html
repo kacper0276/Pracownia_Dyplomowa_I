@@ -1,9 +1,23 @@
 <div class="main-container">
   @if (userData) {
   <div class="user-profile">
-    <div class="user-profile-header">
+    <div
+      class="user-profile-header"
+      [ngStyle]="{
+        'background-image': userData.backgroundImage
+          ? 'url(' + userData.backgroundImage + ')'
+          : 'url(../../../../../assets/img/ProfileBackground.jpg)'
+      }"
+    >
       <div class="user-profile-header-img">
-        <img src="../../../../../assets/img/ProfilePic.jpg" alt="Picture img" />
+        <img
+          [src]="
+            userData.profileImage
+              ? userData.profileImage
+              : '../../../../../assets/img/ProfilePic.jpg'
+          "
+          alt="Picture img"
+        />
         <div
           class="active-circle"
           [ngStyle]="
@@ -32,7 +46,11 @@
       <div class="friends-list">
         <div class="friend-card" *ngFor="let friend of userData.friends">
           <img
-            src="../../../../../assets/img/ProfilePic.jpg"
+            [src]="
+              friend.profileImage
+                ? friend.profileImage
+                : '../../../../../assets/img/ProfilePic.jpg'
+            "
             alt="Picture img"
             width="100px"
             height="100px"
