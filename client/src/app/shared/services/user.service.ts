@@ -26,4 +26,8 @@ export class UserService {
       {}
     );
   }
+
+  getInvites(userId: number) {
+    return this.http.get<UserInvite[]>(`users/invites/${userId}`);
+  }
 }

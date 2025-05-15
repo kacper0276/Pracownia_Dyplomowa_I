@@ -35,6 +35,10 @@ export class AuthService {
     return this.currentUser;
   }
 
+  public getUserId(): number {
+    return this.currentUser?.id ?? -1;
+  }
+
   public setLoginData(token: string, refreshToken: string, user: User): void {
     localStorage.setItem(this.JWT_TOKEN, token);
     localStorage.setItem(this.REFRESH_TOKEN, refreshToken);

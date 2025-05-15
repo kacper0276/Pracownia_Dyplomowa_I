@@ -13,6 +13,7 @@ import { AuthService } from '../../../../shared/services/auth.service';
 export class UserProfileComponent implements OnInit {
   userData!: User;
   loginUser!: User;
+  sendInviteFlag: boolean = false;
 
   userProfile = {
     email: 'Test@test.pl',
@@ -74,6 +75,7 @@ export class UserProfileComponent implements OnInit {
       this.userService.getUserByEmail(email).subscribe({
         next: (response) => {
           if (response.data) this.userData = response.data;
+          this.checkIfInviteIsSend(response.data?.id ?? -1);
         },
         error: (error) => {
           console.error('Error fetching user data:', error);
@@ -93,15 +95,28 @@ export class UserProfileComponent implements OnInit {
       : this.userData.login;
   }
 
-  sendInvite(id: number, receiverId: number) {
-    this.userService.sendInvite(id, receiverId).subscribe({
-      next: (res) => {
-        console.log(res.data);
-        if (res.data) this.loginUser.sentInvites.push(res.data);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+  sendInvite(senderId: number, receiverId: number) {
+    if (!this.sendInviteFlag) {
+      this.userService.sendInvite(senderId, receiverId).subscribe({
+        next: (res) => {
+          if (res.data) this.loginUser.sentInvites.push(res.data);
+          this.sendInviteFlag = true;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+  }
+
+  checkIfInviteIsSend(receiverId: number) {
+    const filter = this.loginUser.sentInvites.filter(
+      (el) =>
+        el.receiver.id === receiverId && el.sender.id === this.loginUser.id
+    );
+
+    if (filter.length) {
+      this.sendInviteFlag = true;
+    }
   }
 }

@@ -23,7 +23,7 @@
         class="add-friend-button"
         (click)="sendInvite(loginUser.id, userData.id)"
       >
-        Dodaj do znajomych
+        {{ sendInviteFlag ? "Wysłano zaproszenie" : "Dodaj do znajomych" }}
       </button>
       }
     </div>
