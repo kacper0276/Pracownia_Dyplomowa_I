@@ -3,10 +3,8 @@ import { BaseModel } from './base.model';
 import { User } from './user.model';
 
 export interface UserInvite extends BaseModel {
-  recipientId: number;
-  senderId: number;
+  receiver: User;
+  sender: User;
   status: InviteStatus;
   message?: string;
-  recipient?: User;
-  sender?: User;
 }

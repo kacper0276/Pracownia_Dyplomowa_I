@@ -21,8 +21,8 @@ export class HttpService {
     });
   }
 
-  post<T>(url: string, body: any, options?: any): Observable<T> {
-    return this.http.post<T>(`${environment.apiUrl}${url}`, body, {
+  post<T>(url: string, body: any, options?: any): Observable<ApiResponse<T>> {
+    return this.http.post<ApiResponse<T>>(`${environment.apiUrl}${url}`, body, {
       observe: 'body',
       responseType: 'json',
       ...options,
@@ -32,8 +32,8 @@ export class HttpService {
     });
   }
 
-  put<T>(url: string, body: any, options?: any): Observable<T> {
-    return this.http.put<T>(`${environment.apiUrl}${url}`, body, {
+  put<T>(url: string, body: any, options?: any): Observable<ApiResponse<T>> {
+    return this.http.put<ApiResponse<T>>(`${environment.apiUrl}${url}`, body, {
       observe: 'body',
       responseType: 'json',
       ...options,
@@ -43,8 +43,8 @@ export class HttpService {
     });
   }
 
-  delete<T>(url: string, options?: any): Observable<T> {
-    return this.http.delete<T>(`${environment.apiUrl}${url}`, {
+  delete<T>(url: string, options?: any): Observable<ApiResponse<T>> {
+    return this.http.delete<ApiResponse<T>>(`${environment.apiUrl}${url}`, {
       observe: 'body',
       responseType: 'json',
       ...options,

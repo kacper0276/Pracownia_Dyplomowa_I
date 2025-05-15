@@ -1,5 +1,6 @@
 import { BaseModel } from './base.model';
 import { Post } from './post.model';
+import { UserInvite } from './user-invite.model';
 
 export interface User extends BaseModel {
   email: string;
@@ -12,7 +13,7 @@ export interface User extends BaseModel {
   isOnline: boolean;
   likedPosts: string[];
   friends: User[];
-  sentInvites: string[];
-  receivedInvites: string[];
+  sentInvites: UserInvite[];
+  receivedInvites: UserInvite[];
   posts: Post[];
 }

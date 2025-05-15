@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { User } from '../models';
+import { User, UserInvite } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +18,12 @@ export class UserService {
     return this.http.get<User>(`users/by-email`, {
       params: { userEmail: email },
     });
+  }
+
+  sendInvite(id: number, receiverId: number) {
+    return this.http.post<UserInvite>(
+      `users/${id}/send-friend-request/${receiverId}`,
+      {}
+    );
   }
 }

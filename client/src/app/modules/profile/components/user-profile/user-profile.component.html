@@ -18,7 +18,14 @@
     </div>
     <div class="user-profile-content">
       <p>Bio: {{ userProfile.bio }}</p>
-      <p>Location</p>
+      @if (userData.email !== loginUser.email) {
+      <button
+        class="add-friend-button"
+        (click)="sendInvite(loginUser.id, userData.id)"
+      >
+        Dodaj do znajomych
+      </button>
+      }
     </div>
     <div>
       <h2>Friends</h2>

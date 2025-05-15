@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../../shared/services/user.service';
 import { User } from '../../../../shared/models';
 import { SpinnerService } from '../../../../shared/services/spinner.service';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,6 +12,7 @@ import { SpinnerService } from '../../../../shared/services/spinner.service';
 })
 export class UserProfileComponent implements OnInit {
   userData!: User;
+  loginUser!: User;
 
   userProfile = {
     email: 'Test@test.pl',
@@ -59,7 +61,8 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly userService: UserService,
-    private readonly spinnerService: SpinnerService
+    private readonly spinnerService: SpinnerService,
+    private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -80,11 +83,25 @@ export class UserProfileComponent implements OnInit {
         },
       });
     });
+
+    this.loginUser = this.authService.getUser();
   }
 
   getUserDisplayName(): string {
     return this.userData.firstName
       ? `${this.userData.firstName} ${this.userData.lastName}`
       : this.userData.login;
+  }
+
+  sendInvite(id: number, receiverId: number) {
+    this.userService.sendInvite(id, receiverId).subscribe({
+      next: (res) => {
+        console.log(res.data);
+        if (res.data) this.loginUser.sentInvites.push(res.data);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

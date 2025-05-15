@@ -37,7 +37,7 @@ export class LoginComponent {
       const loginData = this.loginForm.value;
 
       this.httpService
-        .post<ApiResponse<LoginResponseData>>('auth/login', loginData)
+        .post<LoginResponseData>('auth/login', loginData)
         .subscribe({
           next: (response) => {
             console.log('Zalogowano pomyślnie:', response.message);
