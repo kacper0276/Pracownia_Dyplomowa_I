@@ -6,7 +6,7 @@
       [ngStyle]="{
         'background-image': userData.backgroundImage
           ? 'url(' + userData.backgroundImage + ')'
-          : 'url(../../../../../assets/img/ProfileBackground.jpg)'
+          : 'url(assets/img/ProfileBackground.jpg)'
       }"
     >
       <div class="user-profile-header-img">
@@ -14,7 +14,7 @@
           [src]="
             userData.profileImage
               ? userData.profileImage
-              : '../../../../../assets/img/ProfilePic.jpg'
+              : 'assets/img/ProfilePic.jpg'
           "
           alt="Picture img"
         />
@@ -49,7 +49,7 @@
             [src]="
               friend.profileImage
                 ? friend.profileImage
-                : '../../../../../assets/img/ProfilePic.jpg'
+                : 'assets/img/ProfilePic.jpg'
             "
             alt="Picture img"
             width="100px"
@@ -72,9 +72,7 @@
             [ngStyle]="{
               'background-image':
                 'url(' +
-                (post.image
-                  ? post.image
-                  : '../../../../../assets/img/PlaceholderPost.jpg') +
+                (post.image ? post.image : 'assets/img/PlaceholderPost.jpg') +
                 ')'
             }"
           ></div>

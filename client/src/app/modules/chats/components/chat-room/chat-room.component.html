@@ -14,7 +14,10 @@
       </h3>
     </ng-container>
     <ng-template #groupHeader>
-      <img [src]="chat.groupImage" alt="Avatar" />
+      <img
+        [src]="chat.groupImage || 'assets/img/GroupPlaceholder.png'"
+        alt="Avatar"
+      />
       <h3>{{ chat.groupName }}</h3>
     </ng-template>
   </div>
@@ -28,10 +31,7 @@
     >
       <img
         class="avatar"
-        [src]="
-          message.sender.profileImage ||
-          '../../../../../assets/img/ProfilePic.jpg'
-        "
+        [src]="message.sender.profileImage || 'assets/img/ProfilePic.jpg'"
         alt="Avatar"
       />
       <div class="bubble">

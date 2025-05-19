@@ -66,13 +66,15 @@ export class CreateGroupModalComponent implements OnInit {
   createGroup() {
     if (this.groupForm.invalid) return;
     const { groupName, groupImage, participants } = this.groupForm.value;
+    const participantIds = (participants || []).map((p: any) => p.id ?? p);
+    participantIds.push(this.authService.getUserId());
     const payload = {
       groupName,
       groupImage,
       isGroupChat: true,
     };
     this.conversationService
-      .createConversation(payload, participants)
+      .createConversation(payload, participantIds)
       .subscribe({
         next: () => {
           this.close();
