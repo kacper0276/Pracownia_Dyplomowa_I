@@ -15,4 +15,8 @@ export class CreateConversationDto {
   @IsBoolean()
   @IsNotEmpty()
   isGroupChat: boolean;
+
+  @IsString()
+  @IsOptional()
+  groupImage?: string;
 }

@@ -24,6 +24,7 @@ export class ConversationsController {
   ) {
     try {
       const ids = userIds.split(',').map((id) => Number(id));
+
       const conversation = await this.conversationsService.create(
         createConversationDto,
         ids,

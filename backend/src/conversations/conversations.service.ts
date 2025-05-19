@@ -23,6 +23,7 @@ export class ConversationsService {
       participants,
       groupName: createConversationDto.groupName,
       isGroupChat: createConversationDto.isGroupChat,
+      groupImage: createConversationDto?.groupImage ?? '',
     });
 
     return this.conversationRepository.save(conversation);
