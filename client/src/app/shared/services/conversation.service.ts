@@ -16,4 +16,10 @@ export class ConversationService {
       friendId,
     });
   }
+
+  createConversation(payload: any, userIds: number[]) {
+    return this.http.post<Conversation>('conversations', payload, {
+      params: { userIds: userIds.join(',') },
+    });
+  }
 }
