@@ -23,6 +23,10 @@
       </li>
     </ul>
 
+    <button class="create-group-btn" (click)="openCreateGroupModal()">
+      ➕ Utwórz grupę
+    </button>
+
     <ul>
       <li
         *ngFor="let chat of chats"
@@ -69,3 +73,9 @@
     <chat-room [chat]="selectedChat"></chat-room>
   </div>
 </div>
+
+@if (isCreateGroupModalOpen) {
+<create-group-modal
+  (isOpenChange)="isCreateGroupModalOpen = $event"
+></create-group-modal>
+}

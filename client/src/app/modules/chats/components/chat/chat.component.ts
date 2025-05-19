@@ -10,27 +10,7 @@ import { ConversationService } from '../../../../shared/services/conversation.se
   styleUrl: './chat.component.scss',
 })
 export class ChatComponent implements OnInit {
-  // chats = [
-  //   {
-  //     id: 1,
-  //     name: 'Grupa Projektowa',
-  //     avatar: 'assets/img/GroupPlaceholder.png',
-  //     lastMessage: 'Cześć, kiedy spotkanie?',
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Jan Kowalski',
-  //     avatar: 'assets/img/ProfilePic.jpg',
-  //     lastMessage: 'Hej, jak tam projekt?',
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Anna Nowak',
-  //     avatar: 'assets/img/ProfilePic.jpg',
-  //     lastMessage: 'Dzięki za pomoc!',
-  //   },
-  // ];
-
+  isCreateGroupModalOpen = false;
   chats: Conversation[] = [];
   friends: User[] = [];
   filteredFriends: User[] = [];
@@ -49,6 +29,10 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     this.loadChats();
     this.loadFriends();
+  }
+
+  openCreateGroupModal() {
+    this.isCreateGroupModalOpen = true;
   }
 
   loadChats() {

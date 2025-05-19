@@ -1,0 +1,37 @@
+<modal>
+  <div modal-header>
+    <h2>Utwórz nową grupę</h2>
+  </div>
+  <form [formGroup]="groupForm" (ngSubmit)="createGroup()" modal-body>
+    <label>
+      Nazwa grupy:
+      <input formControlName="groupName" type="text" required />
+    </label>
+
+    <label>
+      Zdjęcie grupy:
+      <input type="file" (change)="onFileChange($event)" accept="image/*" />
+    </label>
+    <div *ngIf="groupImageBase64" class="preview">
+      <img [src]="groupImageBase64" alt="Podgląd zdjęcia" />
+    </div>
+
+    <label class="ng-dropdown-panel">
+      Dodaj uczestników:
+
+      <ng-multiselect-dropdown
+        [data]="friends"
+        [(ngModel)]="selectedFriends"
+        [settings]="dropdownSettings"
+        placeholder="Wybierz znajomych"
+        formControlName="participants"
+      >
+      </ng-multiselect-dropdown>
+    </label>
+
+    <div class="modal-actions">
+      <button type="submit" [disabled]="groupForm.invalid">Utwórz</button>
+      <button type="button" (click)="close()">Anuluj</button>
+    </div>
+  </form>
+</modal>

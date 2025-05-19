@@ -5,6 +5,22 @@
   height: 100%;
   background-color: $white;
 
+  .create-group-btn {
+    margin-bottom: 16px;
+    padding: 8px 18px;
+    background: $blue-600;
+    color: $white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    &:hover {
+      background: $blue-700;
+    }
+  }
+
   .chat-list {
     width: 30%;
     background: $gray-100;
