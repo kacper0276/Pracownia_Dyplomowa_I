@@ -53,7 +53,6 @@ export class ChatComponent implements OnInit {
 
   loadChats() {
     this.conversationService.getUserChats(this.userId).subscribe((chats) => {
-      console.log(chats);
       this.chats = chats.data ?? [];
     });
   }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
+import { User } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -32,9 +34,13 @@ export class WebSocketService {
     });
   }
 
-  sendMessage(event: string, data: any): void {
+  sendMessage(conversationId: string, message: string, user: User): void {
     if (this.socket) {
-      this.socket.emit(event, data);
+      this.socket.emit('sendMessage', {
+        roomId: conversationId,
+        senderId: user.id,
+        content: message,
+      });
     }
   }
 
@@ -52,10 +58,22 @@ export class WebSocketService {
     }
   }
 
-  onMessage(event: string, callback: (data: any) => void): void {
-    if (this.socket) {
-      this.socket.on(event, callback);
-    }
+  loadMessages(): Observable<any[]> {
+    return new Observable((observer) => {
+      if (this.socket)
+        this.socket.on('loadMessages', (messages) => {
+          observer.next(messages);
+        });
+    });
+  }
+
+  onMessage(): Observable<any> {
+    return new Observable((observer) => {
+      if (this.socket)
+        this.socket.on('receiveMessage', (msg) => {
+          observer.next(msg);
+        });
+    });
   }
 
   offMessage(event: string): void {
