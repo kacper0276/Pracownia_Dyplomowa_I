@@ -20,4 +20,7 @@ export class Conversation extends BaseEntity {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @Column({ type: 'longtext', nullable: true })
+  groupImage: string;
 }

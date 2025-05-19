@@ -1,7 +1,7 @@
 import { Conversation } from '../../conversations/entities/conversation.entity';
 import { BaseEntity } from '../../entities/base.entity';
 import { User } from '../../users/entities/user.entity';
-import { Column, CreateDateColumn, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity('messages')
 export class Message extends BaseEntity {
@@ -19,7 +19,4 @@ export class Message extends BaseEntity {
 
   @Column({ default: false })
   isRead: boolean;
-
-  @CreateDateColumn()
-  createdAt: Date;
 }

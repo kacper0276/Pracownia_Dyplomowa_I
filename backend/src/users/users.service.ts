@@ -114,6 +114,14 @@ export class UsersService {
     return user;
   }
 
+  async getUserFriends(userId: number) {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['friends'],
+    });
+    return user?.friends ?? [];
+  }
+
   async updateUserStatus(userId: number, isOnline: boolean): Promise<void> {
     await this.userRepository.update({ id: userId }, { isOnline });
   }

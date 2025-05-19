@@ -94,6 +94,24 @@ export class UsersController {
     }
   }
 
+  @Get(':id/friends')
+  async getUserFriends(
+    @Param('id', ParseIntPipe) userId: number,
+    @Res() response: Response,
+  ) {
+    try {
+      const friends = await this.usersService.getUserFriends(userId);
+      response.status(HttpStatus.OK).send({
+        message: 'user-friends-found',
+        data: friends,
+      });
+    } catch (error) {
+      response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: 'a-server-error-occurred',
+      });
+    }
+  }
+
   @Post('register')
   async registerUser(
     @Body() registerData: RegisterData,
