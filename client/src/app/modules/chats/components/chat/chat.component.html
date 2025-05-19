@@ -1,6 +1,28 @@
 <div class="chat-container">
   <div class="chat-list">
     <h2>Twoje rozmowy</h2>
+
+    <input
+      type="text"
+      placeholder="Szukaj znajomego..."
+      [(ngModel)]="searchFriend"
+      (input)="filterFriends()"
+      class="friend-search"
+    />
+    <ul class="friends-list" *ngIf="searchFriend && filteredFriends.length">
+      <li
+        *ngFor="let friend of filteredFriends"
+        (click)="startChatWith(friend)"
+        class="friend-item"
+      >
+        <img
+          [src]="friend.profileImage || 'assets/img/ProfilePic.jpg'"
+          alt="Avatar"
+        />
+        <span>{{ friend.firstName }} {{ friend.lastName }}</span>
+      </li>
+    </ul>
+
     <ul>
       <li
         *ngFor="let chat of chats"

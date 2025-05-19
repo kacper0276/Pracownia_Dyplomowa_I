@@ -41,4 +41,8 @@ export class UserService {
       { accept }
     );
   }
+
+  getFriends(userId: number) {
+    return this.http.get<User[]>(`users/${userId}/friends`);
+  }
 }
