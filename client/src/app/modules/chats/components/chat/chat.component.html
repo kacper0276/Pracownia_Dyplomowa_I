@@ -30,11 +30,36 @@
         [class.active]="selectedChat?.id === chat.id"
       >
         <div class="chat-item">
-          <img [src]="chat.avatar" alt="Avatar" />
-          <div class="chat-info">
-            <h3>{{ chat.name }}</h3>
-            <p>{{ chat.lastMessage }}</p>
-          </div>
+          <ng-container *ngIf="!chat.isGroupChat; else groupChat">
+            <img
+              [src]="
+                getOtherUser(chat)?.profileImage || 'assets/img/ProfilePic.jpg'
+              "
+              alt="Avatar"
+            />
+            <div class="chat-info">
+              <h3>
+                {{
+                  getOtherUser(chat)?.firstName && getOtherUser(chat)?.lastName
+                    ? getOtherUser(chat)?.firstName +
+                      " " +
+                      getOtherUser(chat)?.lastName
+                    : getOtherUser(chat)?.login
+                }}
+              </h3>
+              <!-- <p>{{ chat.lastMessage }}</p> -->
+            </div>
+          </ng-container>
+          <ng-template #groupChat>
+            <img
+              [src]="chat.groupImage || 'assets/img/GroupPlaceholder.png'"
+              alt="Avatar"
+            />
+            <div class="chat-info">
+              <h3>{{ chat.groupName }}</h3>
+              <!-- <p>{{ chat.lastMessage }}</p> -->
+            </div>
+          </ng-template>
         </div>
       </li>
     </ul>

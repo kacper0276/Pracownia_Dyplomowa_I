@@ -10,28 +10,28 @@ import { ConversationService } from '../../../../shared/services/conversation.se
   styleUrl: './chat.component.scss',
 })
 export class ChatComponent implements OnInit {
-  chats = [
-    {
-      id: 1,
-      name: 'Grupa Projektowa',
-      avatar: 'assets/img/GroupPlaceholder.png',
-      lastMessage: 'Cześć, kiedy spotkanie?',
-    },
-    {
-      id: 2,
-      name: 'Jan Kowalski',
-      avatar: 'assets/img/ProfilePic.jpg',
-      lastMessage: 'Hej, jak tam projekt?',
-    },
-    {
-      id: 3,
-      name: 'Anna Nowak',
-      avatar: 'assets/img/ProfilePic.jpg',
-      lastMessage: 'Dzięki za pomoc!',
-    },
-  ];
+  // chats = [
+  //   {
+  //     id: 1,
+  //     name: 'Grupa Projektowa',
+  //     avatar: 'assets/img/GroupPlaceholder.png',
+  //     lastMessage: 'Cześć, kiedy spotkanie?',
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Jan Kowalski',
+  //     avatar: 'assets/img/ProfilePic.jpg',
+  //     lastMessage: 'Hej, jak tam projekt?',
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Anna Nowak',
+  //     avatar: 'assets/img/ProfilePic.jpg',
+  //     lastMessage: 'Dzięki za pomoc!',
+  //   },
+  // ];
 
-  chatsNew: Conversation[] = [];
+  chats: Conversation[] = [];
   friends: User[] = [];
   filteredFriends: User[] = [];
   searchFriend = '';
@@ -54,7 +54,7 @@ export class ChatComponent implements OnInit {
   loadChats() {
     this.conversationService.getUserChats(this.userId).subscribe((chats) => {
       console.log(chats);
-      this.chatsNew = chats.data ?? [];
+      this.chats = chats.data ?? [];
     });
   }
 
@@ -86,5 +86,10 @@ export class ChatComponent implements OnInit {
 
   selectChat(chat: any): void {
     this.selectedChat = chat;
+  }
+
+  getOtherUser(chat: any) {
+    if (!chat.participants) return null;
+    return chat.participants.find((u: any) => u.id !== this.userId);
   }
 }
