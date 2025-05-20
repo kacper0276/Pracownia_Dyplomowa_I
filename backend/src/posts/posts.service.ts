@@ -48,7 +48,7 @@ export class PostsService {
       order: { createdAt: 'DESC' },
       skip: (page - 1) * limit,
       take: limit,
-      relations: ['user', 'comments', 'comments.user'],
+      relations: ['user', 'comments', 'comments.user', 'likedBy'],
     });
   }
 
@@ -73,6 +73,31 @@ export class PostsService {
     const post = await this.findOne(id);
     Object.assign(post, updatePostDto);
     return this.postsRepository.save(post);
+  }
+
+  async toggleLike(postId: number, userId: number) {
+    const post = await this.postsRepository.findOne({
+      where: { id: postId },
+      relations: ['likedBy'],
+    });
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+
+    if (!post) throw new NotFoundException('Post not found');
+
+    if (!user) throw new NotFoundException('User not found');
+
+    const alreadyLiked = post.likedBy.some((user) => user.id === userId);
+
+    if (alreadyLiked) {
+      post.likedBy = post.likedBy.filter((user) => user.id !== userId);
+      post.likes--;
+    } else {
+      post.likedBy.push(user);
+      post.likes++;
+    }
+
+    await this.postsRepository.save(post);
+    return post;
   }
 
   async delete(id: number): Promise<void> {

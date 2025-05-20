@@ -8,6 +8,7 @@ import {
   NotFoundException,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Put,
   Query,
@@ -150,6 +151,25 @@ export class PostsController {
           message: 'internal-server-error',
         });
       }
+    }
+  }
+
+  @Patch(':id/toggle-like')
+  async toggleLike(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('userId') userId: number,
+    @Res() response: Response,
+  ) {
+    try {
+      const post = await this.postsService.toggleLike(id, userId);
+      response.status(HttpStatus.OK).send({
+        message: 'like-toggled',
+        data: post,
+      });
+    } catch (error) {
+      response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: 'internal-server-error',
+      });
     }
   }
 
