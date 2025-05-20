@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Comment, Post, User } from '../../models';
 import { AuthService } from '../../services/auth.service';
 import { CommentService } from '../../services/comment.service';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'post',
@@ -10,23 +11,27 @@ import { CommentService } from '../../services/comment.service';
 })
 export class PostComponent {
   @Input() post!: Post;
-  @Output() like = new EventEmitter<number>();
-  @Output() comment = new EventEmitter<number>();
 
   showComments: boolean = false;
   newComment = '';
 
   constructor(
     private readonly authService: AuthService,
-    private readonly commentService: CommentService
+    private readonly commentService: CommentService,
+    private readonly postService: PostService
   ) {}
 
   onLike() {
-    this.like.emit(this.post.id);
-  }
-
-  onComment() {
-    this.comment.emit(this.post.id);
+    this.postService
+      .toggleLike(this.post.id, this.authService.getUserId())
+      .subscribe({
+        next: (res) => {
+          if (res.data) {
+            this.post.likes = res.data?.likes;
+            this.post.likedBy = res.data.likedBy;
+          }
+        },
+      });
   }
 
   toggleComments() {
@@ -35,7 +40,7 @@ export class PostComponent {
 
   isLikedByCurrentUser(): boolean {
     const user = this.authService.getUser();
-    return this.post.likedBy?.includes(user.id);
+    return !!this.post.likedBy?.some((u: User) => u.id === user.id);
   }
 
   addComment() {

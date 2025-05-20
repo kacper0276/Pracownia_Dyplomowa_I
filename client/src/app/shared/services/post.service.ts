@@ -13,4 +13,8 @@ export class PostService {
       `posts/friends/${userId}?page=${page}&limit=${limit}`
     );
   }
+
+  toggleLike(postId: number, userId: number) {
+    return this.http.patch<Post>(`posts/${postId}/toggle-like`, { userId });
+  }
 }
