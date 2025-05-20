@@ -10,6 +10,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   Res,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
@@ -69,6 +70,31 @@ export class PostsController {
       const posts = await this.postsService.findByUserId(userId);
       response.status(HttpStatus.OK).send({
         message: 'posts-retrieved',
+        data: posts,
+      });
+    } catch (error) {
+      response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: 'internal-server-error',
+      });
+    }
+  }
+
+  @Get('friends/:userId')
+  async getFriendsPosts(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Query('page') page = 1,
+    @Query('limit') limit = 10,
+    @Res() response: Response,
+  ) {
+    try {
+      const posts = await this.postsService.findFriendsPosts(
+        userId,
+        +page,
+        +limit,
+      );
+
+      response.status(HttpStatus.OK).send({
+        message: 'friends-posts-retrieved',
         data: posts,
       });
     } catch (error) {

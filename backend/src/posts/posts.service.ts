@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Post } from './entities/post.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -33,6 +33,22 @@ export class PostsService {
     return this.postsRepository.find({
       where: { user: { id: userId } },
       relations: ['user', 'comments'],
+    });
+  }
+
+  async findFriendsPosts(userId: number, page: number, limit: number) {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['friends'],
+    });
+    const friendIds = user.friends.map((f) => f.id);
+
+    return this.postsRepository.find({
+      where: { user: { id: In(friendIds) } },
+      order: { createdAt: 'DESC' },
+      skip: (page - 1) * limit,
+      take: limit,
+      relations: ['user'],
     });
   }
 
