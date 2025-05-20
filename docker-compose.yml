@@ -1,62 +1,46 @@
 version: "3.8"
 
 services:
-  frontend:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
-    container_name: frontend
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: pracownia
     ports:
-      - "4200:4200"
-    depends_on:
-      - backend
-    networks:
-      - appNetwork
-    dns:
-      - 8.8.8.8
+      - "3306:3306"
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - db_data:/var/lib/mysql
 
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
-    container_name: backend
+    depends_on:
+      - db
     ports:
       - "3000:3000"
-    depends_on:
-      - mysql
-    networks:
-      - appNetwork
-    dns:
-      - 8.8.8.8
-    env_file:
-      - ./backend/.env
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-
-  mysql:
-    image: mysql:8.0
-    container_name: mysql
+    restart: always
     environment:
-      MYSQL_DATABASE: projekt_zespolowy
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-    ports:
-      - "3307:3306"
-    networks:
-      - appNetwork
-    volumes:
-      - mysql_data:/var/lib/mysql
-    dns:
-      - 8.8.8.8
+      - NODE_ENV=production
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_PASSWORD=example
+      - DB_NAME=pracownia
+      - JWT_SECRET=supersecret
+      - PORT=3000
+      - EMAIL_LOGIN=mail
+      - EMAIL_PASSWORD=pass
 
-networks:
-  appNetwork:
-    driver: bridge
+  client:
+    build:
+      context: ./client
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"
+    environment:
+      - NODE_ENV=production
 
 volumes:
-  mysql_data:
-    driver: local
+  db_data:
