@@ -1,0 +1,21 @@
+@use "../../../../styles/variables.scss" as *;
+
+.comment {
+  padding: 8px 0;
+  border-bottom: 1px solid $gray-200;
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: $gray-300;
+    margin-bottom: 2px;
+    .author {
+      font-weight: 600;
+      color: $blue-500;
+    }
+  }
+  .comment-content {
+    font-size: 15px;
+    color: $black;
+  }
+}

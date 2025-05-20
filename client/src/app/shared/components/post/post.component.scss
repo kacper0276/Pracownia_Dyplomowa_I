@@ -50,4 +50,48 @@
       }
     }
   }
+
+  .comments-section {
+    margin-top: 16px;
+    border-radius: 8px;
+    background: $white;
+    padding: 10px 12px;
+    .comments-list {
+      max-height: 220px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      padding-right: 4px;
+    }
+    .add-comment {
+      display: flex;
+      gap: 8px;
+      input[type="text"] {
+        flex: 1;
+        padding: 7px 10px;
+        border: 1px solid $gray-200;
+        border-radius: 6px;
+        font-size: 15px;
+        outline: none;
+        transition: border 0.2s;
+        &:focus {
+          border-color: $blue-500;
+        }
+      }
+      button {
+        padding: 7px 18px;
+        background: $blue-500;
+        color: $white;
+        border: none;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+        &:disabled {
+          background: $gray-200;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
 }

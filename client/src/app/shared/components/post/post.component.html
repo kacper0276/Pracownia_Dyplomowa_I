@@ -14,4 +14,25 @@
     <button (click)="onLike()">❤️ {{ post.likes }}</button>
     <button (click)="onComment()">💬 Komentarze</button>
   </div>
+
+  <div class="comments-section">
+    <div class="comments-list">
+      <comment
+        *ngFor="let comment of post.comments | orderBy : 'createdAt' : true"
+        [comment]="comment"
+      >
+      </comment>
+    </div>
+    <form class="add-comment" (ngSubmit)="addComment()">
+      <input
+        type="text"
+        [(ngModel)]="newComment"
+        name="newComment"
+        placeholder="Dodaj komentarz..."
+        required
+        autocomplete="off"
+      />
+      <button type="submit" [disabled]="!newComment.trim()">Wyślij</button>
+    </form>
+  </div>
 </div>

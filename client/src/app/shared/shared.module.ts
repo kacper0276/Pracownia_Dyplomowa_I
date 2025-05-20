@@ -9,6 +9,9 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { ModalComponent } from './components/modal/modal.component';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { PostComponent } from './components/post/post.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -19,8 +22,10 @@ import { PostComponent } from './components/post/post.component';
     ModalComponent,
     TimeAgoPipe,
     PostComponent,
+    CommentComponent,
+    OrderByPipe,
   ],
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, ReactiveFormsModule, FormsModule],
   exports: [
     CommonModule,
     SpinnerComponent,

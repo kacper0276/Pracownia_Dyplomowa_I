@@ -1,4 +1,5 @@
 import { BaseModel } from './base.model';
+import { Comment } from './comment.model';
 import { User } from './user.model';
 
 export interface Post extends BaseModel {
@@ -7,6 +8,6 @@ export interface Post extends BaseModel {
   image?: string;
   likes: number;
   userId: number;
-  comments: string[];
+  comments: Comment[];
   likedBy: User[];
 }
