@@ -53,4 +53,9 @@ export class AuthService {
   public clearStorage(): void {
     localStorage.clear();
   }
+
+  public logout(): void {
+    this.clearStorage();
+    this.currentUser = null;
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { User } from '../../../../shared/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'side-nav',
@@ -14,7 +15,10 @@ export class SideNavComponent {
 
   @Output() toggleNav = new EventEmitter<boolean>();
 
-  constructor(private readonly authService: AuthService) {
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {
     this.user = this.authService.getUser();
   }
 
@@ -24,4 +28,9 @@ export class SideNavComponent {
   }
 
   changeLanguage(lang: string): void {}
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
+  }
 }
