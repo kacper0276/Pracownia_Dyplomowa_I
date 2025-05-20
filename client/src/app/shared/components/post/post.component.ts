@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Comment, Post } from '../../models';
+import { Comment, Post, User } from '../../models';
 import { AuthService } from '../../services/auth.service';
+import { CommentService } from '../../services/comment.service';
 
 @Component({
   selector: 'post',
@@ -12,7 +13,13 @@ export class PostComponent {
   @Output() like = new EventEmitter<number>();
   @Output() comment = new EventEmitter<number>();
 
-  constructor(private readonly authService: AuthService) {}
+  showComments: boolean = false;
+  newComment = '';
+
+  constructor(
+    private readonly authService: AuthService,
+    private readonly commentService: CommentService
+  ) {}
 
   onLike() {
     this.like.emit(this.post.id);
@@ -22,14 +29,37 @@ export class PostComponent {
     this.comment.emit(this.post.id);
   }
 
-  newComment = '';
+  toggleComments() {
+    this.showComments = !this.showComments;
+  }
+
+  isLikedByCurrentUser(): boolean {
+    const user = this.authService.getUser();
+    return this.post.likedBy?.includes(user.id);
+  }
 
   addComment() {
     if (!this.newComment.trim()) return;
 
     const user = this.authService.getUser();
+    const comment = {
+      content: this.newComment,
+      userEmail: user.email,
+      postId: this.post.id,
+    };
 
-    // this.post.comments = [comment, ...this.post.comments];
+    this.commentService.addComment(comment).subscribe({
+      next: (res) => {
+        if (res.data) this.post.comments = [res.data, ...this.post.comments];
+      },
+    });
+
     this.newComment = '';
+  }
+
+  getUserDisplayName(user: User): string {
+    return user.firstName && user.lastName
+      ? `${user.firstName} ${user.lastName}`
+      : user.login;
   }
 }

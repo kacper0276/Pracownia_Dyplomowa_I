@@ -15,20 +15,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   userId!: number;
   private conversationId!: string;
 
-  // messages = [
-  //   { sender: 'me', text: 'Test!', time: new Date('2023-05-13T10:00:00') },
-  //   {
-  //     sender: 'Jan Kowalski',
-  //     text: 'dasdsadjadksja kdjaslkd jsadkl asjdlkas jdkl asjdklasjdklas jdsakl jaskld j?',
-  //     time: new Date('2023-05-13T10:01:00'),
-  //   },
-  //   {
-  //     sender: 'me',
-  //     text: 'dasdSDASDASD S',
-  //     time: new Date('2023-05-13T10:02:00'),
-  //   },
-  // ];
-
   constructor(
     private readonly wsService: WebSocketService,
     private readonly authService: AuthService

@@ -1,8 +1,13 @@
 <div class="post">
   <div class="post-header">
-    <!-- <img [src]="post.user.profileImage || 'assets/img/ProfilePic.jpg'" class="avatar" /> -->
+    <img
+      [src]="post.user.profileImage || 'assets/img/ProfilePic.jpg'"
+      class="avatar"
+    />
     <div>
-      <!-- <div class="author">{{ post.user.firstName }} {{ post.user.lastName }}</div> -->
+      <div class="author">
+        {{ getUserDisplayName(post.user) }}
+      </div>
       <div class="date">{{ post.createdAt | date : "yyyy-MM-dd HH:mm" }}</div>
     </div>
   </div>
@@ -11,10 +16,13 @@
   </div>
   <div class="post-content">{{ post.description }}</div>
   <div class="post-actions">
-    <button (click)="onLike()">❤️ {{ post.likes }}</button>
-    <button (click)="onComment()">💬 Komentarze</button>
+    <button [class.liked]="isLikedByCurrentUser()" (click)="onLike()">
+      ❤️ {{ post.likes }}
+    </button>
+    <button (click)="toggleComments()">💬 Komentarze</button>
   </div>
 
+  @if (showComments) {
   <div class="comments-section">
     <div class="comments-list">
       <comment
@@ -35,4 +43,5 @@
       <button type="submit" [disabled]="!newComment.trim()">Wyślij</button>
     </form>
   </div>
+  }
 </div>

@@ -2,9 +2,9 @@
   <div class="comment-header">
     <span class="author">
       {{
-        comment.userId.firstName && comment.userId.lastName
-          ? comment.userId.firstName + " " + comment.userId.lastName
-          : comment.userId.login
+        comment.user.firstName && comment.user.lastName
+          ? comment.user.firstName + " " + comment.user.lastName
+          : comment.user.login
       }}
     </span>
     <span class="date">{{

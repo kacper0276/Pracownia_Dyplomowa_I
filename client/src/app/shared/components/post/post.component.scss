@@ -51,6 +51,11 @@
     }
   }
 
+  .post-actions button.liked {
+    color: $red-200;
+    font-weight: bold;
+  }
+
   .comments-section {
     margin-top: 16px;
     border-radius: 8px;

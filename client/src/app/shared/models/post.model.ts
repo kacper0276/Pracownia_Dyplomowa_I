@@ -10,4 +10,5 @@ export interface Post extends BaseModel {
   userId: number;
   comments: Comment[];
   likedBy: User[];
+  user: User;
 }
