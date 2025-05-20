@@ -34,12 +34,14 @@
         <span>Ustawienia</span>
       </a>
     </li>
+    @if (user?.role === 'admin') {
     <li>
       <a routerLink="/users">
         <mat-icon>groups</mat-icon>
         <span>Użytkownicy</span>
       </a>
     </li>
+    }
   </ul>
 
   <button class="logout-button" (click)="logout()">
