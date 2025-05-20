@@ -48,7 +48,7 @@ export class PostsService {
       order: { createdAt: 'DESC' },
       skip: (page - 1) * limit,
       take: limit,
-      relations: ['user'],
+      relations: ['user', 'comments', 'comments.user'],
     });
   }
 
