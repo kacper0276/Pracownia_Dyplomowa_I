@@ -30,7 +30,7 @@ export class UsersService {
   }
 
   private async sendActivationEmail(email: string): Promise<void> {
-    const activationLink = `http://localhost:4200/activate-account/${email}`;
+    const activationLink = `http://localhost:4200/auth/activate-account/${email}`;
     const emailTemplate = getActivationEmailTemplate(activationLink);
 
     const message = {

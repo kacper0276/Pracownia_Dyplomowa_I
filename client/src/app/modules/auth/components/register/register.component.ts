@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiResponse, LoginResponseData } from '../../../../shared/models';
 import { HttpService } from '../../../../shared/services/http.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'register',
@@ -17,12 +18,16 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private toast: ToastrService
   ) {
     this.registerForm = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      login: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       password: ['', Validators.required],
-      repeated_password: ['', Validators.required],
+      repeatedPassword: ['', Validators.required],
     });
   }
 
@@ -36,22 +41,22 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      const loginData = this.registerForm.value;
+      const registerData = this.registerForm.value;
 
-      if (loginData.password !== loginData.repeated_password) {
-        alert('Hasła nie są takie same!');
+      if (registerData.password !== registerData.repeatedPassword) {
+        this.toast.error('Hasła nie są takie same!');
         return;
       }
 
       this.httpService
-        .post<ApiResponse<LoginResponseData>>('user/register', loginData)
+        .post<ApiResponse<LoginResponseData>>('users/register', registerData)
         .subscribe({
           next: (response) => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/auth/login']);
           },
           error: (error) => {
-            console.error('Błąd logowania:', error);
-            alert('Nieprawidłowe dane logowania.');
+            console.error('Błąd rejestracji:', error);
+            this.toast.error('Nieprawidłowe dane.');
           },
         });
     }

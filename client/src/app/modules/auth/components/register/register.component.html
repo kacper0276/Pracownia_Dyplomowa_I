@@ -17,6 +17,48 @@
       </div>
 
       <div class="form-group">
+        <label for="login">Login</label>
+        <input
+          id="login"
+          type="text"
+          formControlName="login"
+          placeholder="Wprowadź login"
+        />
+        @if (registerForm.get('login')?.invalid &&
+        registerForm.get('login')?.touched) {
+        <div class="error">Login jest wymagany.</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="firstName">Imię</label>
+        <input
+          id="firstName"
+          type="text"
+          formControlName="firstName"
+          placeholder="Wprowadź imię"
+        />
+        @if (registerForm.get('firstName')?.invalid &&
+        registerForm.get('firstName')?.touched) {
+        <div class="error">Imię jest wymagane.</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Nazwisko</label>
+        <input
+          id="lastName"
+          type="text"
+          formControlName="lastName"
+          placeholder="Wprowadź nazwisko"
+        />
+        @if (registerForm.get('lastName')?.invalid &&
+        registerForm.get('lastName')?.touched) {
+        <div class="error">Nazwisko jest wymagane.</div>
+        }
+      </div>
+
+      <div class="form-group">
         <label for="password">Hasło</label>
         <div class="password-wrapper">
           <input
@@ -45,8 +87,8 @@
           <input
             id="repeated_password"
             [type]="showRepeatedPassword ? 'text' : 'password'"
-            formControlName="repeated_password"
-            placeholder="Wprowadź hasło"
+            formControlName="repeatedPassword"
+            placeholder="Wprowadź hasło ponownie"
           />
           <button
             type="button"
@@ -56,9 +98,9 @@
             {{ showRepeatedPassword ? "Ukryj" : "Pokaż" }}
           </button>
         </div>
-        @if (registerForm.get('repeated_password')?.invalid &&
-        registerForm.get('repeated_password')?.touched) {
-        <div class="error">Hasło jest wymagane.</div>
+        @if (registerForm.get('repeatedPassword')?.invalid &&
+        registerForm.get('repeatedPassword')?.touched) {
+        <div class="error">Powtórzenie hasła jest wymagane.</div>
         }
       </div>
 

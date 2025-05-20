@@ -11,6 +11,7 @@ export class WebSocketService {
 
   connect(userId: string): void {
     const socketUrl = 'http://localhost:3000';
+    // const socketUrl = 'http://backend:3000';
 
     if (this.socket) {
       console.log('Already connected to WebSocket');
