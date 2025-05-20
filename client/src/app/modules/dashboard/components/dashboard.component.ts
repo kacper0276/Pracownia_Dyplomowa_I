@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   users: User[] = [];
   posts: Post[] = [];
   page = 1;
-  limit = 5;
+  limit = 1000;
   loading = false;
   allLoaded = false;
 
