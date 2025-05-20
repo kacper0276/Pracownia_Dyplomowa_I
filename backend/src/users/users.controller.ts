@@ -9,6 +9,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Put,
   Query,
   Res,
 } from '@nestjs/common';
@@ -218,7 +219,7 @@ export class UsersController {
     }
   }
 
-  @Patch('activate-account')
+  @Put('activate-account')
   async activateAccount(
     @Query('userEmail') userEmail: string,
     @Res() response: Response,
