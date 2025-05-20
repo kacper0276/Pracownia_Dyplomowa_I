@@ -22,6 +22,21 @@
     }
   </div>
 
+  <div class="posts-list" (scroll)="onPostsListScroll($event)">
+    <post
+      *ngFor="let post of posts"
+      [post]="post"
+      (like)="onLike($event)"
+      (comment)="onComment($event)"
+    >
+    </post>
+    @if (loading) {
+    <app-spinner />
+    } @if (allLoaded && posts.length === 0) {
+    <div class="no-posts">Brak postów do wyświetlenia.</div>
+    }
+  </div>
+
   <button class="fab" (click)="toggleShowModal()">
     <mat-icon>add</mat-icon>
   </button>

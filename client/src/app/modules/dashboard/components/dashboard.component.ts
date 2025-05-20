@@ -3,7 +3,9 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { UserService } from '../../../shared/services/user.service';
 import { Router } from '@angular/router';
-import { User } from '../../../shared/models';
+import { Post, User } from '../../../shared/models';
+import { AuthService } from '../../../shared/services/auth.service';
+import { PostService } from '../../../shared/services/post.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +16,16 @@ export class DashboardComponent implements OnInit {
   showModal = false;
   searchControl = new FormControl('');
   users: User[] = [];
+  posts: Post[] = [];
+  page = 1;
+  limit = 5;
+  loading = false;
+  allLoaded = false;
 
   constructor(
     private readonly userService: UserService,
+    private readonly authService: AuthService,
+    private readonly postService: PostService,
     private readonly router: Router
   ) {}
 
@@ -30,6 +39,28 @@ export class DashboardComponent implements OnInit {
       .subscribe((users) => {
         this.users = users.data ?? [];
       });
+
+    this.loadPosts();
+  }
+
+  loadPosts(): void {
+    if (this.loading || this.allLoaded) return;
+    this.loading = true;
+    const userId = this.authService.getUserId();
+    this.postService.getFriendsPosts(userId, this.page, this.limit).subscribe({
+      next: (res) => {
+        const newPosts = res?.data || [];
+        if (newPosts.length < this.limit) this.allLoaded = true;
+        this.posts = [...this.posts, ...newPosts];
+        this.page++;
+        this.loading = false;
+      },
+      error: () => (this.loading = false),
+    });
+  }
+
+  onScroll(): void {
+    this.loadPosts();
   }
 
   goToUserProfile(email: string): void {
@@ -49,5 +80,28 @@ export class DashboardComponent implements OnInit {
   handlePostAdded(post: any): void {
     console.log('New Post:', post);
     this.showModal = false;
+  }
+
+  onLike(postId: number) {
+    console.log('Polubiono post o id:', postId);
+  }
+
+  onComment(postId: number) {
+    console.log('Komentarz do posta o id:', postId);
+  }
+
+  onPostsListScroll(event: Event) {
+    if (this.loading || this.allLoaded) return;
+    const target = event.target as HTMLElement;
+    const threshold = 150;
+
+    console.log('DADSAD');
+
+    if (
+      target.scrollHeight - target.scrollTop - target.clientHeight <
+      threshold
+    ) {
+      this.loadPosts();
+    }
   }
 }
