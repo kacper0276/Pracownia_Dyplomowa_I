@@ -45,4 +45,14 @@ export class UserService {
   getFriends(userId: number) {
     return this.http.get<User[]>(`users/${userId}/friends`);
   }
+
+  activateAccount(email: string) {
+    return this.http.put<null>(
+      `users/activate-account`,
+      {},
+      {
+        params: { userEmail: email },
+      }
+    );
+  }
 }
