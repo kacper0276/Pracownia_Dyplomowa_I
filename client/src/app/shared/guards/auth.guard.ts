@@ -2,9 +2,9 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { firstValueFrom } from 'rxjs';
 import { WebSocketService } from '../services/web-socker.service';
+import { environment } from '../../../environments/environment.prod';
 
 export const authGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
