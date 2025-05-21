@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Comment, Post, User } from '../../models';
+import { Component, Input } from '@angular/core';
+import { Post, User } from '../../models';
 import { AuthService } from '../../services/auth.service';
 import { CommentService } from '../../services/comment.service';
 import { PostService } from '../../services/post.service';

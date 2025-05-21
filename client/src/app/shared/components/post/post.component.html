@@ -19,7 +19,9 @@
     <button [class.liked]="isLikedByCurrentUser()" (click)="onLike()">
       ❤️ {{ post.likes }}
     </button>
-    <button (click)="toggleComments()">💬 Komentarze</button>
+    <button (click)="toggleComments()">
+      💬 ({{ post.comments.length }}) Komentarze
+    </button>
   </div>
 
   @if (showComments) {
