@@ -1,4 +1,13 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { WebSocketService } from '../../../../shared/services/web-socker.service';
 import { Conversation, Message, User } from '../../../../shared/models';
 import { AuthService } from '../../../../shared/services/auth.service';
@@ -8,7 +17,11 @@ import { AuthService } from '../../../../shared/services/auth.service';
   templateUrl: './chat-room.component.html',
   styleUrl: './chat-room.component.scss',
 })
-export class ChatRoomComponent implements OnInit, OnDestroy {
+export class ChatRoomComponent
+  implements OnInit, AfterViewInit, OnChanges, OnDestroy
+{
+  @ViewChild('messagesContainer')
+  messagesContainer!: ElementRef<HTMLDivElement>;
   @Input() chat!: Conversation;
   messages: Message[] = [];
   newMessage = '';
@@ -27,13 +40,43 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
     this.wsService.loadMessages().subscribe((msgs) => {
       this.messages = msgs;
+      this.scrollToBottom();
     });
 
     this.wsService.onMessage().subscribe((msg) => {
       if (msg.conversationId === this.conversationId) {
         this.messages.push(msg);
+        this.scrollToBottom();
       }
     });
+  }
+
+  ngAfterViewInit() {
+    this.scrollToBottom();
+  }
+
+  ngOnChanges() {
+    if (this.conversationId) {
+      this.wsService.leaveRoom(this.conversationId);
+    }
+    if (this.chat) {
+      this.conversationId = this.chat.id.toString();
+      this.wsService.joinRoom(this.conversationId);
+
+      this.wsService.loadMessages().subscribe((msgs) => {
+        this.messages = msgs;
+        this.scrollToBottom();
+      });
+    }
+  }
+
+  scrollToBottom() {
+    setTimeout(() => {
+      if (this.messagesContainer) {
+        this.messagesContainer.nativeElement.scrollTop =
+          this.messagesContainer.nativeElement.scrollHeight;
+      }
+    }, 0);
   }
 
   sendMessage(): void {
@@ -44,6 +87,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
         this.authService.getUser()
       );
       this.newMessage = '';
+      this.scrollToBottom();
     }
   }
 
