@@ -39,6 +39,9 @@ export class User extends BaseEntity {
   @Column({ default: false })
   isOnline: boolean;
 
+  @Column({ default: '' })
+  bio: string;
+
   @ManyToMany(() => Post, (post) => post.likedBy)
   @JoinTable({
     name: 'user_liked_posts',

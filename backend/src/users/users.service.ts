@@ -4,10 +4,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
-import { ILike, Repository } from 'typeorm';
-import { RegisterData } from './dto/register-data.dto';
 import * as bcrypt from 'bcrypt';
+import { ILike, Repository } from 'typeorm';
+import { User } from './entities/user.entity';
+import { RegisterData } from './dto/register-data.dto';
 import { LoginData } from './dto/login-data.dto';
 import { MailerService } from '@nestjs-modules/mailer';
 import { getActivationEmailTemplate } from './templates/activation-email.template';
@@ -65,6 +65,8 @@ export class UsersService {
     const user = new User();
     user.email = registerData.email;
     user.login = registerData.login;
+    user.firstName = registerData?.firstName ?? '';
+    user.lastName = registerData?.lastName ?? '';
     user.password = hashedPassword;
     user.isActive = false;
 
@@ -132,7 +134,9 @@ export class UsersService {
       throw new NotFoundException('User not found');
     }
 
-    if (dto.password) {
+    if (!dto.password) {
+      delete dto.password;
+    } else {
       dto.password = await this.hashPassword(dto.password);
     }
 
