@@ -47,6 +47,7 @@
       gap: 10px;
       max-width: 60%;
       position: relative;
+      color: $black;
 
       &.sent {
         align-self: flex-end;
@@ -64,7 +65,6 @@
 
         .bubble {
           background: $white;
-          color: $black;
           border-bottom-left-radius: 0;
         }
       }
@@ -93,13 +93,13 @@
       .sender-name {
         font-size: 13px;
         font-weight: 500;
-        color: $white;
+        color: $black;
         margin-bottom: 2px;
       }
 
       .date {
         font-size: 11px;
-        color: $white;
+        color: $black;
         margin-top: 2px;
         align-self: flex-end;
       }
