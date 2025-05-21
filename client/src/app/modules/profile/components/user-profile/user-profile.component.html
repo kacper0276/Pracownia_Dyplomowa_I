@@ -31,7 +31,36 @@
       <p>{{ userData.email }}</p>
     </div>
     <div class="user-profile-content">
-      <p>Bio: {{ userData.bio }}</p>
+      <div>
+        @if (userData.email === loginUser.email) { @if (!editBio) {
+        <div class="bio-container">
+          <span>{{ userData.bio }}</span>
+          <button
+            mat-icon-button
+            (click)="editBio = true"
+            aria-label="Edytuj bio"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        } @else {
+        <div class="bio-container">
+          <input
+            type="text"
+            [(ngModel)]="bioDraft"
+            (keydown.enter)="saveBio()"
+            (blur)="saveBio()"
+            class="bio-input"
+          />
+          <button mat-icon-button (click)="saveBio()" aria-label="Zapisz bio">
+            <mat-icon>check</mat-icon>
+          </button>
+        </div>
+        } } @else {
+        <p>Bio: {{ userData.bio }}</p>
+        }
+      </div>
+
       @if (userData.email !== loginUser.email && !isFriend()) {
       <button
         class="add-friend-button"
@@ -39,14 +68,18 @@
       >
         {{ sendInviteFlag ? "Wysłano zaproszenie" : "Dodaj do znajomych" }}
       </button>
-      } @else {
+      } @else if (userData.email !== loginUser.email) {
       <button class="add-friend-button" disabled>Znajomi</button>
       }
     </div>
     <div>
       <h2>Friends</h2>
       <div class="friends-list">
-        <div class="friend-card" *ngFor="let friend of userData.friends">
+        <div
+          class="friend-card"
+          *ngFor="let friend of userData.friends"
+          (click)="redirectToFriend(friend.email)"
+        >
           <img
             [src]="
               friend.profileImage

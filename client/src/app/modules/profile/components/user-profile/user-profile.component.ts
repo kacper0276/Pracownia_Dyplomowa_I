@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../shared/services/user.service';
 import { User } from '../../../../shared/models';
 import { SpinnerService } from '../../../../shared/services/spinner.service';
@@ -21,7 +21,8 @@ export class UserProfileComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly userService: UserService,
     private readonly spinnerService: SpinnerService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -90,8 +91,20 @@ export class UserProfileComponent implements OnInit {
   saveBio() {
     if (this.editBio && this.bioDraft !== this.userData.bio) {
       console.log(this.bioDraft);
+      this.userService
+        .updateBio(this.loginUser.email, this.bioDraft)
+        .subscribe({
+          complete: () => {
+            this.editBio = false;
+            this.userData.bio = this.bioDraft;
+          },
+        });
     } else {
       this.editBio = false;
     }
+  }
+
+  redirectToFriend(email: string) {
+    this.router.navigate(['/profile'], { queryParams: { email } });
   }
 }

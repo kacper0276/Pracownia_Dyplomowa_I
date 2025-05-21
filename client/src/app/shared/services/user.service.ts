@@ -55,4 +55,8 @@ export class UserService {
       }
     );
   }
+
+  updateBio(email: string, bio: string) {
+    return this.http.patch<null>('users/edit-bio', { email, bio });
+  }
 }

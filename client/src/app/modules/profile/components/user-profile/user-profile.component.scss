@@ -64,6 +64,15 @@
   }
 
   .user-profile-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .bio-container {
+      display: flex;
+      align-items: center;
+    }
+
     p {
       margin: 5px 0;
       color: $black;
@@ -87,6 +96,18 @@
       min-width: 180px;
     }
 
+    button[mat-icon-button] {
+      margin-left: 6px;
+      color: $blue-600;
+      background: transparent;
+      border: none;
+      outline: none;
+
+      &:hover {
+        background: $gray-100;
+      }
+    }
+
     .add-friend-button {
       padding: 10px;
       border: none;
@@ -94,6 +115,7 @@
       cursor: pointer;
       background: $blue-600;
       border-radius: 5px;
+      width: 20%;
     }
   }
 
@@ -119,6 +141,7 @@
       text-align: center;
       width: 150px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
 
       img {
         border-radius: 50%;
