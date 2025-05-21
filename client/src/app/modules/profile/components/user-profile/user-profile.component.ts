@@ -14,50 +14,8 @@ export class UserProfileComponent implements OnInit {
   userData!: User;
   loginUser!: User;
   sendInviteFlag: boolean = false;
-
-  userProfile = {
-    email: 'Test@test.pl',
-    name: 'TEST',
-    surname: 'Testowy',
-    bio: 'AAAADASDASDASDKASO D IAS DOASIDJ ASOID',
-    isActive: true,
-    friends: [
-      {
-        id: 1,
-        name: 'Jan',
-        surname: 'Kowalski',
-        email: '',
-      },
-    ],
-    posts: [
-      {
-        id: 1,
-        title: 'Post 1',
-        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        date: new Date('2023-10-01'),
-      },
-      {
-        id: 2,
-        title: 'Post 2',
-        content:
-          'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        date: new Date('2023-10-02'),
-      },
-      {
-        id: 1,
-        title: 'Post 1',
-        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        date: new Date('2023-10-01'),
-      },
-      {
-        id: 2,
-        title: 'Post 2',
-        content:
-          'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        date: new Date('2023-10-02'),
-      },
-    ],
-  };
+  editBio: boolean = false;
+  bioDraft: string = '';
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -87,6 +45,7 @@ export class UserProfileComponent implements OnInit {
     });
 
     this.loginUser = this.authService.getUser();
+    this.bioDraft = this.userData?.bio || '';
   }
 
   getUserDisplayName(): string {
@@ -121,6 +80,18 @@ export class UserProfileComponent implements OnInit {
 
     if (filter.length) {
       this.sendInviteFlag = true;
+    }
+  }
+
+  isFriend(): boolean {
+    return this.loginUser.friends?.some((f: User) => f.id === this.userData.id);
+  }
+
+  saveBio() {
+    if (this.editBio && this.bioDraft !== this.userData.bio) {
+      console.log(this.bioDraft);
+    } else {
+      this.editBio = false;
     }
   }
 }

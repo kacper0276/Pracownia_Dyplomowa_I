@@ -32,13 +32,15 @@
     </div>
     <div class="user-profile-content">
       <p>Bio: {{ userData.bio }}</p>
-      @if (userData.email !== loginUser.email) {
+      @if (userData.email !== loginUser.email && !isFriend()) {
       <button
         class="add-friend-button"
         (click)="sendInvite(loginUser.id, userData.id)"
       >
         {{ sendInviteFlag ? "Wysłano zaproszenie" : "Dodaj do znajomych" }}
       </button>
+      } @else {
+      <button class="add-friend-button" disabled>Znajomi</button>
       }
     </div>
     <div>
