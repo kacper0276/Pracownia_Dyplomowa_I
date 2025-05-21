@@ -1,0 +1,92 @@
+@use "../../../../styles/variables.scss" as *;
+
+.multi-select {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+
+  .selected-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+
+    .selected-item {
+      background: $black;
+      color: $blue-500;
+      border-radius: 16px;
+      padding: 3px 10px 3px 8px;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      button {
+        background: none;
+        border: none;
+        color: $blue-400;
+        font-size: 17px;
+        margin-left: 4px;
+        cursor: pointer;
+        line-height: 1;
+      }
+    }
+  }
+
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid $gray-200;
+    border-radius: 6px;
+    padding: 4px 8px;
+    background: $white;
+    cursor: pointer;
+    input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 16px;
+      background: transparent;
+    }
+    .arrow {
+      margin-left: 8px;
+      font-size: 14px;
+      color: $black;
+    }
+  }
+
+  .dropdown {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: $white;
+    border: 1px solid $gray-300;
+    border-radius: 6px;
+    margin-top: 2px;
+    z-index: 10;
+    max-height: 180px;
+    overflow-y: scroll;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+
+    .dropdown-action {
+      padding: 8px 12px;
+      cursor: pointer;
+      color: $blue-500;
+      font-weight: 500;
+      border-bottom: 1px solid $white;
+      &:hover {
+        background: $gray-300;
+      }
+    }
+    .dropdown-option {
+      padding: 8px 12px;
+      cursor: pointer;
+      &:hover {
+        background: $gray-300;
+      }
+    }
+    .dropdown-empty {
+      padding: 8px 12px;
+      color: $black;
+      font-size: 15px;
+    }
+  }
+}

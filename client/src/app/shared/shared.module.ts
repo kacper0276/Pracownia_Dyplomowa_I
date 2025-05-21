@@ -12,6 +12,7 @@ import { PostComponent } from './components/post/post.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,15 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     PostComponent,
     CommentComponent,
     OrderByPipe,
+    MultiSelectComponent,
   ],
-  imports: [CommonModule, HttpClientModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   exports: [
     CommonModule,
     SpinnerComponent,
@@ -35,6 +43,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     TruncatePipe,
     TimeAgoPipe,
     PostComponent,
+    MultiSelectComponent,
   ],
 })
 export class SharedModule {}

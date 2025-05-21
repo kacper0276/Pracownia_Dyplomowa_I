@@ -1,0 +1,34 @@
+<div class="multi-select">
+  {{ selected.length }}
+  <div class="selected-list">
+    <span class="selected-item" *ngFor="let sel of selected">
+      {{ sel[labelKey] }}
+      <button type="button" (click)="removeSelected(sel)">×</button>
+    </span>
+  </div>
+  <div class="input-wrapper" (click)="toggleDropdown()">
+    <input
+      type="text"
+      [placeholder]="placeholder"
+      [(ngModel)]="search"
+      (focus)="dropdownOpen = true"
+      (click)="$event.stopPropagation()"
+    />
+    <span class="arrow">&#9660;</span>
+  </div>
+  <div class="dropdown" *ngIf="dropdownOpen">
+    <div class="dropdown-action" (click)="selectAll()">
+      {{ selectAllLabel }}
+    </div>
+    <div
+      class="dropdown-option"
+      *ngFor="let opt of filteredOptions"
+      (click)="selectOption(opt)"
+    >
+      {{ opt[labelKey] }}
+    </div>
+    <div class="dropdown-empty" *ngIf="filteredOptions.length === 0">
+      Brak wyników
+    </div>
+  </div>
+</div>

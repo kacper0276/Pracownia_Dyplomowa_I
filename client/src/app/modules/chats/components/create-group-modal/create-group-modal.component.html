@@ -19,14 +19,14 @@
     <label class="ng-dropdown-panel">
       Dodaj uczestników:
 
-      <ng-multiselect-dropdown
-        [data]="friends"
-        [(ngModel)]="selectedFriends"
-        [settings]="dropdownSettings"
-        placeholder="Wybierz znajomych"
-        formControlName="participants"
-      >
-      </ng-multiselect-dropdown>
+      <multi-select
+        [options]="friends"
+        labelKey="email"
+        valueKey="id"
+        placeholder="Wyszukaj znajomych"
+        selectAllLabel="Zaznacz wszystkich"
+        (selectionChange)="groupForm.get('participants')?.setValue($event)"
+      ></multi-select>
     </label>
 
     <div class="modal-actions">
