@@ -18,6 +18,7 @@ import { Response } from 'express';
 import { RegisterData } from './dto/register-data.dto';
 import { UserInvitesService } from './user-invites.service';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { EditBio } from './dto/edit-bio.dto';
 
 @Controller('users')
 export class UsersController {
@@ -152,6 +153,31 @@ export class UsersController {
       response.status(HttpStatus.OK).send({
         message: 'friend-request-sent',
         data: resp,
+      });
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        response.status(HttpStatus.BAD_REQUEST).send({
+          message: error.message,
+        });
+      } else if (error instanceof NotFoundException) {
+        response.status(HttpStatus.NOT_FOUND).send({
+          message: error.message,
+        });
+      } else {
+        response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+          message: 'a-server-error-occurred',
+        });
+      }
+    }
+  }
+
+  @Patch('edit-bio')
+  async editBio(@Body() data: EditBio, @Res() response: Response) {
+    try {
+      await this.usersService.editBio(data);
+
+      response.status(HttpStatus.OK).send({
+        message: 'update-change-bio',
       });
     } catch (error) {
       if (error instanceof BadRequestException) {

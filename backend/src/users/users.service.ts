@@ -14,6 +14,7 @@ import { getActivationEmailTemplate } from './templates/activation-email.templat
 import { UserInvite } from './entities/user-invite.entity';
 import { InviteStatus } from 'src/enums/invite-status.enum';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { EditBio } from './dto/edit-bio.dto';
 
 @Injectable()
 export class UsersService {
@@ -235,14 +236,17 @@ export class UsersService {
     await this.userInviteRepository.save(invite);
   }
 
-  // async likePost(userId: number, postId: string): Promise<void> {
-  //   const user = await this.findOneById(userId);
+  async editBio(data: EditBio) {
+    const user = await this.userRepository.findOne({
+      where: { email: data.email },
+    });
 
-  //   if (user.likedPost.includes(postId)) {
-  //     throw new BadRequestException('Post already liked');
-  //   }
+    if (!user) {
+      throw new NotFoundException('Not found user');
+    }
 
-  //   user.likedPost.push(postId);
-  //   await this.userRepository.save(user);
-  // }
+    user.bio = data.bio;
+
+    await this.userRepository.save(user);
+  }
 }
