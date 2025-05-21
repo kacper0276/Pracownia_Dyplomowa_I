@@ -108,9 +108,7 @@ export class UserProfileComponent implements OnInit {
           if (res.data) this.loginUser.sentInvites.push(res.data);
           this.sendInviteFlag = true;
         },
-        error: (err) => {
-          console.log(err);
-        },
+        error: () => {},
       });
     }
   }

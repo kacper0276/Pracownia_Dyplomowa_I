@@ -46,12 +46,10 @@ export class AddPostComponent {
 
   onSubmit(): void {
     if (this.postForm.valid) {
-      console.log(this.authService.getUser());
       const postData = {
         ...this.postForm.value,
         userEmail: this.authService.getUser().email,
       };
-      console.log(postData);
       this.httpService.post('posts', postData).subscribe({
         next: () => {
           this.toast.success('Post added successfully');

@@ -78,24 +78,17 @@ export class DashboardComponent implements OnInit {
   }
 
   handlePostAdded(post: any): void {
-    console.log('New Post:', post);
     this.showModal = false;
   }
 
-  onLike(postId: number) {
-    console.log('Polubiono post o id:', postId);
-  }
+  onLike(postId: number) {}
 
-  onComment(postId: number) {
-    console.log('Komentarz do posta o id:', postId);
-  }
+  onComment(postId: number) {}
 
   onPostsListScroll(event: Event) {
     if (this.loading || this.allLoaded) return;
     const target = event.target as HTMLElement;
     const threshold = 150;
-
-    console.log('DADSAD');
 
     if (
       target.scrollHeight - target.scrollTop - target.clientHeight <

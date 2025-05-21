@@ -14,7 +14,6 @@ export class WebSocketService {
     // const socketUrl = 'http://backend:3000';
 
     if (this.socket) {
-      console.log('Already connected to WebSocket');
       return;
     }
 
@@ -22,17 +21,11 @@ export class WebSocketService {
       query: { userId },
     });
 
-    this.socket.on('connect', () => {
-      console.log(`Connected to WebSocket as ${userId}`);
-    });
+    this.socket.on('connect', () => {});
 
-    this.socket.on('connect_error', (error: Error) => {
-      console.error('WebSocket connection error:', error);
-    });
+    this.socket.on('connect_error', (error: Error) => {});
 
-    this.socket.on('disconnect', () => {
-      console.log('Disconnected from WebSocket');
-    });
+    this.socket.on('disconnect', () => {});
   }
 
   sendMessage(conversationId: string, message: string, user: User): void {
@@ -48,14 +41,12 @@ export class WebSocketService {
   joinRoom(roomId: string): void {
     if (this.socket) {
       this.socket.emit('joinRoom', roomId);
-      console.log(`Joined room: ${roomId}`);
     }
   }
 
   leaveRoom(roomId: string): void {
     if (this.socket) {
       this.socket.emit('leaveRoom', roomId);
-      console.log(`Left room: ${roomId}`);
     }
   }
 
@@ -87,7 +78,6 @@ export class WebSocketService {
     if (this.socket) {
       this.socket.disconnect();
       this.socket = null;
-      console.log('Disconnected from WebSocket');
     }
   }
 }

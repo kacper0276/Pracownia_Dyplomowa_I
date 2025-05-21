@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UserInvite } from '../../../../shared/models';
 import { UserService } from '../../../../shared/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'invite',
@@ -11,7 +12,10 @@ export class InviteComponent {
   @Input() invite!: UserInvite;
   @Output() onRequestInvite = new EventEmitter<void>();
 
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly toast: ToastrService
+  ) {}
 
   requestInvite(acceptInvite: boolean): void {
     this.userService
@@ -22,12 +26,11 @@ export class InviteComponent {
       )
       .subscribe({
         next: (res) => {
-          console.log(res);
-
+          this.toast.success('Wysłano zaproszenie');
           this.onRequestInvite.emit();
         },
         error: (err) => {
-          console.log(err);
+          this.toast.error('Błąd podczas wysyłania zaproszenia');
         },
       });
   }

@@ -13,6 +13,7 @@ export interface User extends BaseModel {
   backgroundImage?: string;
   isActive: boolean;
   isOnline: boolean;
+  bio: string;
   likedPosts: string[];
   friends: User[];
   sentInvites: UserInvite[];

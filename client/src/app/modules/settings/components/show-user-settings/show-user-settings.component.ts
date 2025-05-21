@@ -31,6 +31,7 @@ export class ShowUserSettingsComponent implements OnInit {
       password: [''],
       profileImage: [user?.profileImage || null],
       backgroundImage: [user?.backgroundImage || null],
+      bio: [user?.bio || ''],
     });
 
     this.profileImageBase64 = user?.profileImage || null;
