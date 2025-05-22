@@ -41,7 +41,7 @@ export class UserProfileComponent implements OnInit {
           this.checkIfInviteIsSend(response.data?.id ?? -1);
         },
         error: (error) => {
-          console.error('Error fetching user data:', error);
+          this.toast.error('Error fetching user data:');
         },
         complete: () => {
           this.spinnerService.hide();
@@ -94,7 +94,6 @@ export class UserProfileComponent implements OnInit {
 
   saveBio() {
     if (this.editBio && this.bioDraft !== this.userData.bio) {
-      console.log(this.bioDraft);
       this.userService
         .updateBio(this.loginUser.email, this.bioDraft)
         .subscribe({
@@ -115,11 +114,9 @@ export class UserProfileComponent implements OnInit {
   deletePost(postId: number) {
     this.postService.deletePost(postId).subscribe({
       next: () => {
-        console.log(this.userData.posts.length);
         this.userData.posts = this.userData.posts.filter(
           (post) => post.id !== postId
         );
-        console.log(this.userData.posts.length);
         this.toast.success('Usunięto post');
       },
       error: () => {

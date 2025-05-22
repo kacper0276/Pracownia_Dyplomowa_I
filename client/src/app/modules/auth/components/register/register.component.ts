@@ -55,7 +55,7 @@ export class RegisterComponent {
             this.router.navigate(['/auth/login']);
           },
           error: (error) => {
-            console.error('Błąd rejestracji:', error);
+            this.toast.error('Błąd rejestracji:');
             this.toast.error('Nieprawidłowe dane.');
           },
         });
