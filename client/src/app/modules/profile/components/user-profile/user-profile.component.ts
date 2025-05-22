@@ -4,6 +4,8 @@ import { UserService } from '../../../../shared/services/user.service';
 import { User } from '../../../../shared/models';
 import { SpinnerService } from '../../../../shared/services/spinner.service';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { PostService } from '../../../../shared/services/post.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-profile',
@@ -22,6 +24,8 @@ export class UserProfileComponent implements OnInit {
     private readonly userService: UserService,
     private readonly spinnerService: SpinnerService,
     private readonly authService: AuthService,
+    private readonly postService: PostService,
+    private readonly toast: ToastrService,
     private readonly router: Router
   ) {}
 
@@ -106,5 +110,21 @@ export class UserProfileComponent implements OnInit {
 
   redirectToFriend(email: string) {
     this.router.navigate(['/profile'], { queryParams: { email } });
+  }
+
+  deletePost(postId: number) {
+    this.postService.deletePost(postId).subscribe({
+      next: () => {
+        console.log(this.userData.posts.length);
+        this.userData.posts = this.userData.posts.filter(
+          (post) => post.id !== postId
+        );
+        console.log(this.userData.posts.length);
+        this.toast.success('Usunięto post');
+      },
+      error: () => {
+        this.toast.error('Błąd');
+      },
+    });
   }
 }

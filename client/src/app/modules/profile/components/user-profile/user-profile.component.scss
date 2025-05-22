@@ -177,6 +177,13 @@
       padding: 15px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
+      .delete-button {
+        border: none;
+        outline: none;
+        background: transparent;
+        cursor: pointer;
+      }
+
       h3 {
         font-size: 18px;
         font-weight: bold;

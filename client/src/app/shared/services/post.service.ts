@@ -17,4 +17,8 @@ export class PostService {
   toggleLike(postId: number, userId: number) {
     return this.http.patch<Post>(`posts/${postId}/toggle-like`, { userId });
   }
+
+  deletePost(postId: number) {
+    return this.http.delete<null>(`posts/${postId}`);
+  }
 }

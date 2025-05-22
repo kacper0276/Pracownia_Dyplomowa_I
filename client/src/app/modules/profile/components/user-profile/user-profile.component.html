@@ -99,6 +99,11 @@
       <h2>Posts</h2>
       <div class="posts-list">
         <div class="post-card" *ngFor="let post of userData.posts">
+          @if (userData.email === loginUser.email) {
+          <button class="delete-button" (click)="deletePost(post.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          }
           <h3>{{ post.name }}</h3>
           <p>{{ post.description }}</p>
           <p>{{ post.createdAt | date : "short" }}</p>
