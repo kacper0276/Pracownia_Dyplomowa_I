@@ -19,6 +19,10 @@ export class WebSocketService {
 
     this.socket = io(socketUrl, {
       query: { userId },
+      reconnection: true,
+      reconnectionAttempts: Infinity,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
     });
 
     this.socket.on('connect', () => {});
