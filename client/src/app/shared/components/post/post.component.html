@@ -20,7 +20,7 @@
       ❤️ {{ post.likes }}
     </button>
     <button (click)="toggleComments()">
-      💬 ({{ post.comments.length }}) Komentarze
+      💬 ({{ post.comments.length }}) {{ "comments" | translate }}
     </button>
   </div>
 
@@ -38,11 +38,13 @@
         type="text"
         [(ngModel)]="newComment"
         name="newComment"
-        placeholder="Dodaj komentarz..."
+        [placeholder]="'add-comment' | translate"
         required
         autocomplete="off"
       />
-      <button type="submit" [disabled]="!newComment.trim()">Wyślij</button>
+      <button type="submit" [disabled]="!newComment.trim()">
+        {{ "send" | translate }}
+      </button>
     </form>
   </div>
   }

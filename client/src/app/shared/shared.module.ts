@@ -13,6 +13,7 @@ import { CommentComponent } from './components/comment/comment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MultiSelectComponent } from './components/multi-select/multi-select.com
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
+    TranslateModule,
   ],
   exports: [
     CommonModule,
@@ -46,6 +48,7 @@ import { MultiSelectComponent } from './components/multi-select/multi-select.com
     PostComponent,
     MultiSelectComponent,
     MatIconModule,
+    TranslateModule,
   ],
 })
 export class SharedModule {}
