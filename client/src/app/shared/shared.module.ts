@@ -33,6 +33,7 @@ import { MultiSelectComponent } from './components/multi-select/multi-select.com
     ReactiveFormsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatIconModule,
   ],
   exports: [
     CommonModule,
@@ -44,6 +45,7 @@ import { MultiSelectComponent } from './components/multi-select/multi-select.com
     TimeAgoPipe,
     PostComponent,
     MultiSelectComponent,
+    MatIconModule,
   ],
 })
 export class SharedModule {}
