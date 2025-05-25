@@ -6,6 +6,7 @@ import { HttpService } from '../../../../shared/services/http.service';
 import { ApiResponse, LoginResponseData } from '../../../../shared/models';
 import { WebSocketService } from '../../../../shared/services/web-socker.service';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'login',
@@ -22,7 +23,8 @@ export class LoginComponent {
     private readonly authService: AuthService,
     private readonly httpService: HttpService,
     private readonly webSocketService: WebSocketService,
-    private readonly toast: ToastrService
+    private readonly toast: ToastrService,
+    private readonly translate: TranslateService
   ) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -51,7 +53,7 @@ export class LoginComponent {
             this.router.navigate(['/']);
           },
           error: () => {
-            this.toast.error('Nieprawidłowe dane logowania.');
+            this.toast.error(this.translate.instant('incorrect-login-details'));
           },
         });
     }

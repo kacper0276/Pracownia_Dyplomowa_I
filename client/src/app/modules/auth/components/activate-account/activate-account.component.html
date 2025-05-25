@@ -1,5 +1,7 @@
 <div class="activate-account-container">
-  <h2>Aktywacja konta</h2>
-  <div *ngIf="status === 'pending'">Aktywuję konto...</div>
-  <div *ngIf="status !== 'pending'">{{ message }}</div>
+  <h2>{{ "activate-account" | translate }}</h2>
+  <div *ngIf="status === 'pending'">
+    {{ "account-activation-is-in-progress" | translate }}
+  </div>
+  <div *ngIf="status !== 'pending'">{{ message | translate }}</div>
 </div>

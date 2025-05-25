@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ApiResponse, LoginResponseData } from '../../../../shared/models';
 import { HttpService } from '../../../../shared/services/http.service';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'register',
@@ -19,7 +20,8 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private router: Router,
     private httpService: HttpService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private translate: TranslateService
   ) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -44,19 +46,18 @@ export class RegisterComponent {
       const registerData = this.registerForm.value;
 
       if (registerData.password !== registerData.repeatedPassword) {
-        this.toast.error('Hasła nie są takie same!');
+        this.toast.error(this.translate.instant('passwords-do-not-match'));
         return;
       }
 
       this.httpService
         .post<ApiResponse<LoginResponseData>>('users/register', registerData)
         .subscribe({
-          next: (response) => {
+          next: () => {
             this.router.navigate(['/auth/login']);
           },
-          error: (error) => {
-            this.toast.error('Błąd rejestracji:');
-            this.toast.error('Nieprawidłowe dane.');
+          error: () => {
+            this.toast.error(this.translate.instant('incorrect-data'));
           },
         });
     }

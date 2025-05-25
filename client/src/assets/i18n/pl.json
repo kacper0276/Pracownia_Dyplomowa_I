@@ -5,5 +5,34 @@
 
   "comments": "Komentarze",
   "send": "Wyślij",
-  "add-comment": "Dodaj komentarz"
+  "add-comment": "Dodaj komentarz",
+
+  "activate-account": "Aktywuj swoje konto",
+  "account-activation-is-in-progress": "aktywacja konta jest w toku",
+  "an-error-occurred-while-registering-your-account": "Wystąpił błąd podczas rejestrowania Twojego konta. Spróbuj ponownie później.",
+  "account-activated-successfully": "Konto zostało pomyślnie aktywowane",
+  "invalid-activation-link": "Nieprawidłowy link aktywacyjny. Sprawdź link i spróbuj ponownie.",
+
+  "login": "Zaloguj się",
+  "email": "Email",
+  "user-email-is-required": "Email użytkownika jest wymagany",
+  "password": "Hasło",
+  "hidden": "Ukryj",
+  "show": "Pokaż",
+  "password-is-required": "Hasło jest wymagane",
+  "log-in": "Zaloguj się",
+  "dont-have-an-account-sign-up": "Nie masz konta? Zarejestruj się",
+  "incorrect-login-details": "Nieprawidłowe dane logowania",
+
+  "register": "Zarejestruj się",
+  "username": "Nazwa użytkownika",
+  "login-is-required": "Login jest wymagany",
+  "first-name": "Imię",
+  "first-name-is-required": "Imię jest wymagane",
+  "last-name": "Nazwisko",
+  "last-name-is-required": "Nazwisko jest wymagane",
+  "repeat-password": "Powtórz hasło",
+  "repeat-password-is-required": "Powtórzenie hasła jest wymagane",
+  "passwords-do-not-match": "Hasła nie pasują do siebie",
+  "incorrect-data": "Nieprawidłowe dane"
 }

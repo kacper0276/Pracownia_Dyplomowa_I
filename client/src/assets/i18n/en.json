@@ -5,5 +5,33 @@
 
   "comments": "Comments",
   "send": "Send",
-  "add-comment": "Add a comment"
+  "add-comment": "Add a comment",
+
+  "activate-account": "Activate your account",
+  "account-activation-is-in-progress": "account activation is in progress",
+  "an-error-occurred-while-registering-your-account": "An error occurred while registering your account. Please try again later.",
+  "account-activated-successfully": "Account activated successfully",
+  "invalid-activation-link": "Invalid activation link. Please check the link and try again.",
+
+  "login": "Login",
+  "email": "Email",
+  "user-email-is-required": "User email is required",
+  "password": "Password",
+  "hidden": "Hidden",
+  "show": "Show",
+  "password-is-required": "Password is required",
+  "log-in": "Log in",
+  "dont-have-an-account-sign-up": "Don't have an account? Sign up",
+
+  "register": "Register",
+  "username": "Username",
+  "login-is-required": "Login is required",
+  "first-name": "Firstname",
+  "first-name-is-required": "Firstname is required",
+  "last-name": "Lastname",
+  "last-name-is-required": "Lastname is required",
+  "repeat-password": "Repeat password",
+  "repeat-password-is-required": "Repeat password is required",
+  "passwords-do-not-match": "Passwords do not match",
+  "incorrect-data": "Incorrect data"
 }

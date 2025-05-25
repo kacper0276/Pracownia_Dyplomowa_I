@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpService } from '../../../../shared/services/http.service';
 import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
@@ -24,19 +23,18 @@ export class ActivateAccountComponent implements OnInit {
       this.userService.activateAccount(email).subscribe({
         next: () => {
           this.status = 'success';
-          this.message = 'Konto zostało aktywowane. Możesz się zalogować.';
+          this.message = 'account-activated-successfully';
 
           this.router.navigate(['/auth/login']);
         },
         error: (err) => {
           this.status = 'error';
-          this.message =
-            err?.error?.message || 'Wystąpił błąd podczas aktywacji konta.';
+          this.message = 'an-error-occurred-while-registering-your-account';
         },
       });
     } else {
       this.status = 'error';
-      this.message = 'Brak adresu email w linku aktywacyjnym.';
+      this.message = 'invalid-activation-link';
     }
   }
 }

@@ -1,106 +1,90 @@
 <div class="register-container">
   <div class="register-card">
-    <h2>Rejestracja</h2>
+    <h2>{{ "register" | translate }}</h2>
     <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
       <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          formControlName="email"
-          placeholder="Wprowadź email użytkownika"
-        />
+        <label for="email">{{ "email" | translate }}</label>
+        <input id="email" type="email" formControlName="email" />
         @if (registerForm.get('email')?.invalid &&
         registerForm.get('email')?.touched) {
-        <div class="error">Email użytkownika jest wymagany.</div>
+        <div class="error">{{ "user-email-is-required" | translate }}</div>
         }
       </div>
 
       <div class="form-group">
-        <label for="login">Login</label>
-        <input
-          id="login"
-          type="text"
-          formControlName="login"
-          placeholder="Wprowadź login"
-        />
+        <label for="login">{{ "username" | translate }}</label>
+        <input id="login" type="text" formControlName="login" />
         @if (registerForm.get('login')?.invalid &&
         registerForm.get('login')?.touched) {
-        <div class="error">Login jest wymagany.</div>
+        <div class="error">{{ "login-is-required" | translate }}</div>
         }
       </div>
 
       <div class="form-group">
-        <label for="firstName">Imię</label>
-        <input
-          id="firstName"
-          type="text"
-          formControlName="firstName"
-          placeholder="Wprowadź imię"
-        />
+        <label for="firstName">{{ "first-name" | translate }}</label>
+        <input id="firstName" type="text" formControlName="firstName" />
         @if (registerForm.get('firstName')?.invalid &&
         registerForm.get('firstName')?.touched) {
-        <div class="error">Imię jest wymagane.</div>
+        <div class="error">{{ "first-name-is-required" | translate }}</div>
         }
       </div>
 
       <div class="form-group">
-        <label for="lastName">Nazwisko</label>
-        <input
-          id="lastName"
-          type="text"
-          formControlName="lastName"
-          placeholder="Wprowadź nazwisko"
-        />
+        <label for="lastName">{{ "last-name" | translate }}</label>
+        <input id="lastName" type="text" formControlName="lastName" />
         @if (registerForm.get('lastName')?.invalid &&
         registerForm.get('lastName')?.touched) {
-        <div class="error">Nazwisko jest wymagane.</div>
+        <div class="error">{{ "last-name-is-required" | translate }}</div>
         }
       </div>
 
       <div class="form-group">
-        <label for="password">Hasło</label>
+        <label for="password">{{ "password" | translate }}</label>
         <div class="password-wrapper">
           <input
             id="password"
             [type]="showPassword ? 'text' : 'password'"
             formControlName="password"
-            placeholder="Wprowadź hasło"
           />
           <button
             type="button"
             class="toggle-password"
             (click)="togglePasswordVisibility()"
           >
-            {{ showPassword ? "Ukryj" : "Pokaż" }}
+            {{ showPassword ? ("hidden" | translate) : ("show" | translate) }}
           </button>
         </div>
         @if (registerForm.get('password')?.invalid &&
         registerForm.get('password')?.touched) {
-        <div class="error">Hasło jest wymagane.</div>
+        <div class="error">{{ "password-is-required" | translate }}</div>
         }
       </div>
 
       <div class="form-group">
-        <label for="repeated_password">Powtórz hasło</label>
+        <label for="repeated_password">{{
+          "repeat-password" | translate
+        }}</label>
         <div class="password-wrapper">
           <input
             id="repeated_password"
             [type]="showRepeatedPassword ? 'text' : 'password'"
             formControlName="repeatedPassword"
-            placeholder="Wprowadź hasło ponownie"
           />
           <button
             type="button"
             class="toggle-password"
             (click)="toggleRepeatedPasswordVisibility()"
           >
-            {{ showRepeatedPassword ? "Ukryj" : "Pokaż" }}
+            {{
+              showRepeatedPassword
+                ? ("hidden" | translate)
+                : ("show" | translate)
+            }}
           </button>
         </div>
         @if (registerForm.get('repeatedPassword')?.invalid &&
         registerForm.get('repeatedPassword')?.touched) {
-        <div class="error">Powtórzenie hasła jest wymagane.</div>
+        <div class="error">{{ "repeat-password-is-required" | translate }}</div>
         }
       </div>
 
@@ -109,7 +93,7 @@
         [disabled]="registerForm.invalid"
         class="register-button"
       >
-        Zarejestruj się
+        {{ "register" | translate }}
       </button>
     </form>
   </div>
