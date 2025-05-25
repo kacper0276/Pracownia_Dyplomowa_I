@@ -33,5 +33,18 @@
   "repeat-password": "Repeat password",
   "repeat-password-is-required": "Repeat password is required",
   "passwords-do-not-match": "Passwords do not match",
-  "incorrect-data": "Incorrect data"
+  "incorrect-data": "Incorrect data",
+
+  "your-conversations": "Your conversations",
+  "search-for-a-friend": "Search for a friend",
+  "create-group": "Create group",
+
+  "write-a-message": "Write a message",
+
+  "create-new-group": "Create new group",
+  "group-name": "Group name",
+  "group-image": "Group image",
+  "add-users": "Add users",
+  "cancel": "Cancel",
+  "create": "Create"
 }

@@ -1,10 +1,10 @@
 <div class="chat-container">
   <div class="chat-list">
-    <h2>Twoje rozmowy</h2>
+    <h2>{{ "your-conversations" | translate }}</h2>
 
     <input
       type="text"
-      placeholder="Szukaj znajomego..."
+      [placeholder]="'search-for-a-friend' | translate"
       [(ngModel)]="searchFriend"
       (input)="filterFriends()"
       class="friend-search"
@@ -24,7 +24,7 @@
     </ul>
 
     <button class="create-group-btn" (click)="openCreateGroupModal()">
-      ➕ Utwórz grupę
+      ➕ {{ "create-group" | translate }}
     </button>
 
     <ul>

@@ -34,5 +34,18 @@
   "repeat-password": "Powtórz hasło",
   "repeat-password-is-required": "Powtórzenie hasła jest wymagane",
   "passwords-do-not-match": "Hasła nie pasują do siebie",
-  "incorrect-data": "Nieprawidłowe dane"
+  "incorrect-data": "Nieprawidłowe dane",
+
+  "your-conversations": "Twoje rozmowy",
+  "search-for-a-friend": "Szukaj znajomego",
+  "create-group": "Utwórz grupę",
+
+  "write-a-message": "Napisz wiadomość",
+
+  "create-new-group": "Utwórz nową grupę",
+  "group-name": "Nazwa grupy",
+  "group-image": "Zdjęcie grupy",
+  "add-users": "Dodaj uczestników",
+  "cancel": "Anuluj",
+  "create": "Utwórz"
 }

@@ -79,9 +79,7 @@ export class CreateGroupModalComponent implements OnInit {
         next: () => {
           this.close();
         },
-        error: () => {
-          alert('Nie udało się utworzyć grupy');
-        },
+        error: () => {},
       });
   }
 
