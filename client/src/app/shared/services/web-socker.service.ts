@@ -10,8 +10,9 @@ export class WebSocketService {
   private socket: Socket | null = null;
 
   connect(userId: string): void {
-    const socketUrl = 'http://localhost:3000';
+    // const socketUrl = 'http://localhost:3000';
     // const socketUrl = 'http://backend:3000';
+    const socketUrl = 'http://52.158.32.227:3000';
 
     if (this.socket) {
       return;
