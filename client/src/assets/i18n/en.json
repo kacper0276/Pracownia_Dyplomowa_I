@@ -46,5 +46,16 @@
   "group-image": "Group image",
   "add-users": "Add users",
   "cancel": "Cancel",
-  "create": "Create"
+  "create": "Create",
+
+  "no-posts-to-display": "No posts to display",
+  "create-new-post": "Create new post",
+
+  "profile": "Profile",
+  "invites": "Invites",
+  "chat": "Chat",
+  "settings": "Settings",
+  "log-out": "Log out",
+
+  "all-rights-reserved": "All rights reserved"
 }

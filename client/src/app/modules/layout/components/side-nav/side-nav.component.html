@@ -13,25 +13,25 @@
     <li>
       <a routerLink="/profile" [queryParams]="{ email: user?.email }">
         <mat-icon>person</mat-icon>
-        <span>Profil</span>
+        <span>{{ "profile" | translate }}</span>
       </a>
     </li>
     <li>
       <a routerLink="/invites">
         <mat-icon>person_add</mat-icon>
-        <span>Zaproszenia</span>
+        <span>{{ "invites" | translate }}</span>
       </a>
     </li>
     <li>
       <a routerLink="/chats">
         <mat-icon>chat</mat-icon>
-        <span>Chat</span>
+        <span>{{ "chat" | translate }}</span>
       </a>
     </li>
     <li>
       <a routerLink="/settings">
         <mat-icon>settings</mat-icon>
-        <span>Ustawienia</span>
+        <span>{{ "settings" | translate }}</span>
       </a>
     </li>
     @if (user?.role === 'admin') {
@@ -46,7 +46,7 @@
 
   <button class="logout-button" (click)="logout()">
     <mat-icon>logout</mat-icon>
-    <span *ngIf="!isCollapsed">Wyloguj</span>
+    <span *ngIf="!isCollapsed">{{ "log-out" | translate }}</span>
   </button>
 
   <div class="language-switcher">

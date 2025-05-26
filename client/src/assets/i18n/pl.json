@@ -47,5 +47,16 @@
   "group-image": "Zdjęcie grupy",
   "add-users": "Dodaj uczestników",
   "cancel": "Anuluj",
-  "create": "Utwórz"
+  "create": "Utwórz",
+
+  "no-posts-to-display": "Brak postów do wyświetlenia",
+  "create-new-post": "Utwórz nowy post",
+
+  "profile": "Profil",
+  "invites": "Zaproszenia",
+  "chat": "Czat",
+  "settings": "Ustawienia",
+  "log-out": "Wyloguj się",
+
+  "all-rights-reserved": "Wszelkie prawa zastrzeżone"
 }

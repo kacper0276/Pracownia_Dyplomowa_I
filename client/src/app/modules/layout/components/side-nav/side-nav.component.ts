@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { User } from '../../../../shared/models';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'side-nav',
@@ -17,7 +18,8 @@ export class SideNavComponent {
 
   constructor(
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly translate: TranslateService
   ) {
     this.user = this.authService.getUser();
   }
@@ -27,7 +29,9 @@ export class SideNavComponent {
     this.toggleNav.emit(this.isCollapsed);
   }
 
-  changeLanguage(lang: string): void {}
+  changeLanguage(lang: string): void {
+    this.translate.use(lang);
+  }
 
   logout(): void {
     this.authService.logout();
