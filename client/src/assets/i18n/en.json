@@ -73,5 +73,13 @@
   "image": "Image",
   "add-post": "Add Post",
   "error-adding-post": "Error adding post. Please try again later.",
-  "post-added-successfully": "Post added successfully"
+  "post-added-successfully": "Post added successfully",
+
+  "friends": "Friends",
+  "add-to-friends": "Add to Friends",
+  "posts": "Posts",
+  "failed-to-retrieve-user-data": "Failed to retrieve user data",
+  "error-delete-post": "Error deleting post. Please try again later.",
+  "post-deleted-successfully": "Post deleted successfully",
+  "error-fetching-user-data": "Error fetching user data. Please try again later."
 }

@@ -66,14 +66,20 @@
         class="add-friend-button"
         (click)="sendInvite(loginUser.id, userData.id)"
       >
-        {{ sendInviteFlag ? "Wysłano zaproszenie" : "Dodaj do znajomych" }}
+        {{
+          sendInviteFlag
+            ? ("invitation-sent" | translate)
+            : ("add-to-friends" | translate)
+        }}
       </button>
       } @else if (userData.email !== loginUser.email) {
-      <button class="add-friend-button" disabled>Znajomi</button>
+      <button class="add-friend-button" disabled>
+        {{ "friends" | translate }}
+      </button>
       }
     </div>
     <div>
-      <h2>Friends</h2>
+      <h2>{{ "friends" | translate }}</h2>
       <div class="friends-list">
         <div
           class="friend-card"
@@ -96,7 +102,7 @@
       </div>
     </div>
     <div>
-      <h2>Posts</h2>
+      <h2>{{ "posts" | translate }}</h2>
       <div class="posts-list">
         <div class="post-card" *ngFor="let post of userData.posts">
           @if (userData.email === loginUser.email) {
@@ -121,6 +127,6 @@
     </div>
   </div>
   } @else {
-  <h1>Nie udało się pobrać danych użytkownika</h1>
+  <h1>{{ "failed-to-retrieve-user-data" | translate }}</h1>
   }
 </div>

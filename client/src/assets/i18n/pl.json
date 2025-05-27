@@ -74,5 +74,13 @@
   "image": "Obraz",
   "add-post": "Dodaj post",
   "error-adding-post": "Błąd podczas dodawania posta",
-  "post-added-successfully": "Post został pomyślnie dodany"
+  "post-added-successfully": "Post został pomyślnie dodany",
+
+  "friends": "Znajomi",
+  "add-to-friends": "Dodaj do znajomych",
+  "posts": "Posty",
+  "failed-to-retrieve-user-data": "Nie udało się pobrać danych użytkownika",
+  "error-delete-post": "Błąd podczas usuwania posta",
+  "post-deleted-successfully": "Post został pomyślnie usunięty",
+  "error-fetching-user-data": "Błąd podczas pobierania danych użytkownika"
 }

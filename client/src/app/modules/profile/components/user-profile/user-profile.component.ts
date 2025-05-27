@@ -6,6 +6,7 @@ import { SpinnerService } from '../../../../shared/services/spinner.service';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { PostService } from '../../../../shared/services/post.service';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-profile',
@@ -26,7 +27,8 @@ export class UserProfileComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly postService: PostService,
     private readonly toast: ToastrService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -40,8 +42,8 @@ export class UserProfileComponent implements OnInit {
           if (response.data) this.userData = response.data;
           this.checkIfInviteIsSend(response.data?.id ?? -1);
         },
-        error: (error) => {
-          this.toast.error('Error fetching user data:');
+        error: () => {
+          this.toast.error(this.translate.instant('error-fetching-user-data'));
         },
         complete: () => {
           this.spinnerService.hide();
@@ -117,10 +119,10 @@ export class UserProfileComponent implements OnInit {
         this.userData.posts = this.userData.posts.filter(
           (post) => post.id !== postId
         );
-        this.toast.success('Usunięto post');
+        this.toast.success(this.translate.instant('post-deleted-successfully'));
       },
       error: () => {
-        this.toast.error('Błąd');
+        this.toast.error(this.translate.instant('error-delete-post'));
       },
     });
   }
