@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UserInvite } from '../../../../shared/models';
 import { UserService } from '../../../../shared/services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'invite',
@@ -14,7 +15,8 @@ export class InviteComponent {
 
   constructor(
     private readonly userService: UserService,
-    private readonly toast: ToastrService
+    private readonly toast: ToastrService,
+    private readonly translate: TranslateService
   ) {}
 
   requestInvite(acceptInvite: boolean): void {
@@ -25,12 +27,12 @@ export class InviteComponent {
         acceptInvite
       )
       .subscribe({
-        next: (res) => {
-          this.toast.success('Wysłano zaproszenie');
+        next: () => {
+          this.toast.success(this.translate.instant('invitation-sent'));
           this.onRequestInvite.emit();
         },
-        error: (err) => {
-          this.toast.error('Błąd podczas wysyłania zaproszenia');
+        error: () => {
+          this.toast.error(this.translate.instant('error-sending-invitation'));
         },
       });
   }

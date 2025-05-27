@@ -58,5 +58,19 @@
   "settings": "Ustawienia",
   "log-out": "Wyloguj się",
 
-  "all-rights-reserved": "Wszelkie prawa zastrzeżone"
+  "all-rights-reserved": "Wszelkie prawa zastrzeżone",
+
+  "sent": "Wysłano",
+  "accept": "Akceptuj",
+  "decline": "Odrzuć",
+  "invitation-sent": "Wysłano zaproszenie",
+  "error-sending-invitation": "Błąd podczas wysyłania zaproszenia",
+  "your-invitations": "Twoje zaproszenia",
+
+  "post-name": "Nazwa posta",
+  "post-name-required": "Nazwa posta jest wymagana.",
+  "description": "Opis",
+  "description-required": "Opis jest wymagany.",
+  "image": "Obraz",
+  "add-post": "Dodaj post"
 }

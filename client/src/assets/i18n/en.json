@@ -57,5 +57,19 @@
   "settings": "Settings",
   "log-out": "Log out",
 
-  "all-rights-reserved": "All rights reserved"
+  "all-rights-reserved": "All rights reserved",
+
+  "sent": "Sent",
+  "accept": "Akceptuj",
+  "decline": "Odrzuć",
+  "invitation-sent": "Invitation sent",
+  "error-sending-invitation": "Error sending invitation. Please try again later.",
+  "your-invitations": "Your invitations",
+
+  "post-name": "Post Name",
+  "post-name-required": "Post name is required.",
+  "description": "Description",
+  "description-required": "Description is required.",
+  "image": "Image",
+  "add-post": "Add Post"
 }

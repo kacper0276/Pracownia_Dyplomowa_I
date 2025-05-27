@@ -2,10 +2,16 @@
   <div class="invite-info">
     <h4>{{ invite.sender.firstName }} {{ invite.sender.lastName }}</h4>
     <p>{{ invite.sender.email }}</p>
-    <p class="time-sent">Wysłano: {{ invite.createdAt | timeAgo }}</p>
+    <p class="time-sent">
+      {{ "sent" | translate }}: {{ invite.createdAt | timeAgo }}
+    </p>
   </div>
   <div class="invite-actions">
-    <button class="accept-btn" (click)="requestInvite(true)">Akceptuj</button>
-    <button class="decline-btn" (click)="requestInvite(false)">Odrzuć</button>
+    <button class="accept-btn" (click)="requestInvite(true)">
+      {{ "accept" | translate }}
+    </button>
+    <button class="decline-btn" (click)="requestInvite(false)">
+      {{ "decline" | translate }}
+    </button>
   </div>
 </div>
