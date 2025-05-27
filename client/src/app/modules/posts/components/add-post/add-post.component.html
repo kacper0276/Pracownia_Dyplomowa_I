@@ -1,14 +1,14 @@
 <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label for="name">Post Name</label>
+    <label for="name">{{ "post-name" | translate }}</label>
     <input id="name" formControlName="name" type="text" class="form-control" />
     @if (postForm.get('name')?.invalid && postForm.get('name')?.touched) {
-    <div>Post name is required.</div>
+    <div>{{ "post-name-required" | translate }}</div>
     }
   </div>
 
   <div class="form-group">
-    <label for="description">Description</label>
+    <label for="description">{{ "description" | translate }}</label>
     <textarea
       id="description"
       formControlName="description"
@@ -16,12 +16,12 @@
     ></textarea>
     @if (postForm.get('description')?.invalid &&
     postForm.get('description')?.touched) {
-    <div>Description is required.</div>
+    <div>{{ "description-required" | translate }}</div>
     }
   </div>
 
   <div class="form-group">
-    <label for="image">Image</label>
+    <label for="image">{{ "image" | translate }}</label>
     <input
       id="image"
       type="file"
@@ -36,6 +36,6 @@
   </div>
 
   <button type="submit" class="btn" [disabled]="postForm.invalid">
-    Add Post
+    {{ "add-post" | translate }}
   </button>
 </form>

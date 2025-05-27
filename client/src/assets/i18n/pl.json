@@ -72,5 +72,7 @@
   "description": "Opis",
   "description-required": "Opis jest wymagany.",
   "image": "Obraz",
-  "add-post": "Dodaj post"
+  "add-post": "Dodaj post",
+  "error-adding-post": "Błąd podczas dodawania posta",
+  "post-added-successfully": "Post został pomyślnie dodany"
 }

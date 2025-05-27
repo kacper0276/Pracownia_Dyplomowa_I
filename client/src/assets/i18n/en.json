@@ -71,5 +71,7 @@
   "description": "Description",
   "description-required": "Description is required.",
   "image": "Image",
-  "add-post": "Add Post"
+  "add-post": "Add Post",
+  "error-adding-post": "Error adding post. Please try again later.",
+  "post-added-successfully": "Post added successfully"
 }
