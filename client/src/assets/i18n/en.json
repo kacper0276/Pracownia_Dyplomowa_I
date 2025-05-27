@@ -81,5 +81,15 @@
   "failed-to-retrieve-user-data": "Failed to retrieve user data",
   "error-delete-post": "Error deleting post. Please try again later.",
   "post-deleted-successfully": "Post deleted successfully",
-  "error-fetching-user-data": "Error fetching user data. Please try again later."
+  "error-fetching-user-data": "Error fetching user data. Please try again later.",
+
+  "user-settings": "User Settings",
+  "new-password": "New Password",
+  "show-password": "Show password",
+  "hide-password": "Hide password",
+  "profile-image": "Profile Image",
+  "background-image": "Background Image",
+  "save-changes": "Save changes",
+  "settings-saved-success": "Settings have been saved!",
+  "settings-save-error": "Error while saving settings."
 }

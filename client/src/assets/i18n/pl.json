@@ -82,5 +82,15 @@
   "failed-to-retrieve-user-data": "Nie udało się pobrać danych użytkownika",
   "error-delete-post": "Błąd podczas usuwania posta",
   "post-deleted-successfully": "Post został pomyślnie usunięty",
-  "error-fetching-user-data": "Błąd podczas pobierania danych użytkownika"
+  "error-fetching-user-data": "Błąd podczas pobierania danych użytkownika",
+
+  "user-settings": "Ustawienia użytkownika",
+  "new-password": "Nowe hasło",
+  "show-password": "Pokaż hasło",
+  "hide-password": "Ukryj hasło",
+  "profile-image": "Zdjęcie profilowe",
+  "background-image": "Zdjęcie tła",
+  "save-changes": "Zapisz zmiany",
+  "settings-saved-success": "Ustawienia zostały zapisane!",
+  "settings-save-error": "Błąd podczas zapisywania ustawień."
 }
