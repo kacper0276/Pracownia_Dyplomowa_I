@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Post, User } from '../../../shared/models';
 import { AuthService } from '../../../shared/services/auth.service';
 import { PostService } from '../../../shared/services/post.service';
+import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +28,9 @@ export class DashboardComponent implements OnInit {
     private readonly userService: UserService,
     private readonly authService: AuthService,
     private readonly postService: PostService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly translate: TranslateService,
+    private readonly titleService: Title
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +43,8 @@ export class DashboardComponent implements OnInit {
       .subscribe((users) => {
         this.users = users.data ?? [];
       });
+
+    this.titleService.setTitle(this.translate.instant('dashboard-title'));
 
     this.loadPosts();
   }

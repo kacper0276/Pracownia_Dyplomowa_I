@@ -5,6 +5,7 @@ import { ApiResponse, LoginResponseData } from '../../../../shared/models';
 import { HttpService } from '../../../../shared/services/http.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'register',
@@ -17,11 +18,12 @@ export class RegisterComponent {
   showRepeatedPassword = false;
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private httpService: HttpService,
-    private toast: ToastrService,
-    private translate: TranslateService
+    private readonly fb: FormBuilder,
+    private readonly router: Router,
+    private readonly httpService: HttpService,
+    private readonly toast: ToastrService,
+    private readonly translate: TranslateService,
+    private readonly titleService: Title
   ) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -31,6 +33,8 @@ export class RegisterComponent {
       password: ['', Validators.required],
       repeatedPassword: ['', Validators.required],
     });
+
+    this.titleService.setTitle(this.translate.instant('register-title'));
   }
 
   togglePasswordVisibility(): void {

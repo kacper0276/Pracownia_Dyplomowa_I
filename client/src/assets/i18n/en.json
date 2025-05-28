@@ -91,5 +91,14 @@
   "background-image": "Background Image",
   "save-changes": "Save changes",
   "settings-saved-success": "Settings have been saved!",
-  "settings-save-error": "Error while saving settings."
+  "settings-save-error": "Error while saving settings.",
+
+  "activate-account-title": "Activate your account",
+  "login-title": "Login to your account",
+  "register-title": "Register a new account",
+  "chat-title": "Chat",
+  "dashboard-title": "Dashboard",
+  "invites-title": "Invites",
+  "profile-title": "Profile",
+  "settings-title": "Settings"
 }

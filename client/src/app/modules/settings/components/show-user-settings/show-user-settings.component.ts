@@ -4,6 +4,7 @@ import { AuthService } from '../../../../shared/services/auth.service';
 import { UserService } from '../../../../shared/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-show-user-settings',
@@ -21,8 +22,11 @@ export class ShowUserSettingsComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly userService: UserService,
     private readonly toast: ToastrService,
-    private readonly translate: TranslateService
-  ) {}
+    private readonly translate: TranslateService,
+    private readonly titleService: Title
+  ) {
+    this.titleService.setTitle(this.translate.instant('settings-title'));
+  }
 
   ngOnInit(): void {
     const user = this.authService.getUser();

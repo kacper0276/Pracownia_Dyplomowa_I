@@ -3,6 +3,8 @@ import { Conversation, User } from '../../../../shared/models';
 import { UserService } from '../../../../shared/services/user.service';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { ConversationService } from '../../../../shared/services/conversation.service';
+import { TranslateService } from '@ngx-translate/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'chat',
@@ -21,9 +23,13 @@ export class ChatComponent implements OnInit {
   constructor(
     private readonly userService: UserService,
     private readonly conversationService: ConversationService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly translate: TranslateService,
+    private readonly titleService: Title
   ) {
     this.userId = this.authService.getUser().id;
+
+    this.titleService.setTitle(this.translate.instant('chat-title'));
   }
 
   ngOnInit(): void {

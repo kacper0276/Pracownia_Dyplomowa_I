@@ -92,5 +92,14 @@
   "background-image": "Zdjęcie tła",
   "save-changes": "Zapisz zmiany",
   "settings-saved-success": "Ustawienia zostały zapisane!",
-  "settings-save-error": "Błąd podczas zapisywania ustawień."
+  "settings-save-error": "Błąd podczas zapisywania ustawień.",
+
+  "activate-account-title": "Aktywuj swoje konto",
+  "login-title": "Zaloguj się do swojego konta",
+  "register-title": "Zarejestruj nowe konto",
+  "chat-title": "Chat",
+  "dashboard-title": "Dashboard",
+  "invites-title": "Zaproszenia",
+  "profile-title": "Profil",
+  "settings-title": "Ustawienia użytkownika"
 }

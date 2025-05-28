@@ -7,6 +7,7 @@ import { ApiResponse, LoginResponseData } from '../../../../shared/models';
 import { WebSocketService } from '../../../../shared/services/web-socker.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'login',
@@ -24,12 +25,15 @@ export class LoginComponent {
     private readonly httpService: HttpService,
     private readonly webSocketService: WebSocketService,
     private readonly toast: ToastrService,
-    private readonly translate: TranslateService
+    private readonly translate: TranslateService,
+    private readonly titleService: Title
   ) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
+
+    this.titleService.setTitle(this.translate.instant('login-title'));
   }
 
   togglePasswordVisibility(): void {

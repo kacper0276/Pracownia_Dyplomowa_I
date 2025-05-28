@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
 import { UserInvite } from '../../../shared/models';
 import { AuthService } from '../../../shared/services/auth.service';
+import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'invites',
@@ -12,8 +14,12 @@ export class InvitesComponent implements OnInit {
   userInvites: UserInvite[] = [];
   constructor(
     private readonly userService: UserService,
-    private readonly authService: AuthService
-  ) {}
+    private readonly authService: AuthService,
+    private readonly translate: TranslateService,
+    private readonly titleService: Title
+  ) {
+    this.titleService.setTitle(this.translate.instant('invites-title'));
+  }
 
   ngOnInit(): void {
     this.loadInvites();

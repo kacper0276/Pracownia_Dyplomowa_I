@@ -7,6 +7,7 @@ import { AuthService } from '../../../../shared/services/auth.service';
 import { PostService } from '../../../../shared/services/post.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-profile',
@@ -28,8 +29,11 @@ export class UserProfileComponent implements OnInit {
     private readonly postService: PostService,
     private readonly toast: ToastrService,
     private readonly router: Router,
-    private readonly translate: TranslateService
-  ) {}
+    private readonly translate: TranslateService,
+    private readonly titleService: Title
+  ) {
+    this.titleService.setTitle(this.translate.instant('profile-title'));
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {

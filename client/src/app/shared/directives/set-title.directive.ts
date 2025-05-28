@@ -2,7 +2,7 @@ import { Directive, Input, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Directive({
-  selector: '[appSetTitle]',
+  selector: '[setTitle]',
 })
 export class SetTitleDirective implements OnInit {
   @Input('appSetTitle') pageTitle!: string;
