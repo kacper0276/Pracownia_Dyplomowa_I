@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../shared/services/auth.service';
@@ -14,7 +14,7 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   showPassword = false;
 
@@ -32,8 +32,12 @@ export class LoginComponent {
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
 
-    this.titleService.setTitle(this.translate.instant('login-title'));
+  ngOnInit(): void {
+    this.translate.get('login-title').subscribe((title) => {
+      this.titleService.setTitle(title);
+    });
   }
 
   togglePasswordVisibility(): void {
