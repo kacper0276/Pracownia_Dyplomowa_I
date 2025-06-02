@@ -1,0 +1,40 @@
+<form [formGroup]="editForm" (ngSubmit)="onSave()" class="user-item-form">
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email" type="email" />
+  </div>
+  <div>
+    <label for="login">Login:</label>
+    <input id="login" formControlName="login" type="text" />
+  </div>
+  <div>
+    <label for="firstName">Imię:</label>
+    <input id="firstName" formControlName="firstName" type="text" />
+  </div>
+  <div>
+    <label for="lastName">Nazwisko:</label>
+    <input id="lastName" formControlName="lastName" type="text" />
+  </div>
+  <div>
+    <label for="role">Rola:</label>
+    <select id="role" formControlName="role">
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+  </div>
+  <div>
+    <label for="password">Hasło:</label>
+    <input
+      id="password"
+      formControlName="password"
+      [type]="showPassword ? 'text' : 'password'"
+    />
+    <button type="button" (click)="showPassword = !showPassword">
+      {{ showPassword ? "Ukryj" : "Pokaż" }}
+    </button>
+  </div>
+  <div class="actions">
+    <button type="submit" [disabled]="editForm.invalid">Zapisz</button>
+    <button type="button" (click)="delete.emit(user.id)">Usuń</button>
+  </div>
+</form>

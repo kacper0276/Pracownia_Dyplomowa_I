@@ -1,1 +1,9 @@
-<p>show-users works!</p>
+<div class="show-users-container">
+  <h2>Lista użytkowników</h2>
+  <user-item
+    *ngFor="let user of users"
+    [user]="user"
+    (save)="updateUser($event)"
+    (delete)="deleteUser($event)"
+  ></user-item>
+</div>
